@@ -1,4 +1,3 @@
-console.log("hello world");
 $(document).ready(function() {
     //as user types in the search bar, search through all cells in the table
     //skipping the form row, and update what is shown in the table based on matches
@@ -118,10 +117,8 @@ function setRowHover() {
 }
 
 function setDeleteButtons() {
-    console.log("set delete buttons was called");
         //delete a record from the db
         $('.delete').click(function(e) {
-            console.log('a click was registered');
             let id = e.target.id;
             url = getQueryURL() + `delete=${id}`;
     
