@@ -1,0 +1,34 @@
+<form method="post" id="onRequestForm"> {% csrf_token %}
+    <table>
+        <thead>
+            <th>Requests</th>
+            <tr>
+                <th>ID <i class="bi bi-caret-down-fill" id="-id"></i></th>
+                <th>Item <i class="bi bi-caret-down-fill" id="-item"></i></th>
+                <th>Amount <i class="bi bi-caret-down-fill" id="-amount"></i></th>
+                <th></th>
+                <th>Status <i class="bi bi-caret-down-fill" id="-status"></i></th>
+            </tr>
+        </thead>
+        <tbody>   
+            <tr>
+                <td></td>
+                <td>{{ form.item }}</td>
+                <td>{{ form.amount }}</td>
+                <td>{{ form.unit }}</td>
+                <td>{{ form.status }}</td>
+                <td><input type="submit" value="Submit"></td>           
+            </tr>
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.item }}</td>
+                    <td>{{ item.amount }}</td>
+                    <td>{{ item.unit }}</td>
+                    <td>{{ item.status }}</td>
+                    <td class="delete" id="{{item.id}}">Delete</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    
+    </form>

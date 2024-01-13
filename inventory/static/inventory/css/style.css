@@ -1,3 +1,12 @@
 body {
     background-color: blanchedalmond;
 }
+
+.delete {
+    visibility: hidden;
+    width: 50px;
+}
+
+table {
+    border-spacing: 0px;
+}
