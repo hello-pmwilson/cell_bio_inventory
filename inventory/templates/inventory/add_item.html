@@ -1,0 +1,29 @@
+<form method="post" id="addItemForm"> {% csrf_token %}
+    <table>
+        <thead>
+            <th>Items</th>
+            <tr>
+                <th>Item <i class="bi bi-caret-down-fill" id="-item"></i></th>
+                <th>Item Name <i class="bi bi-caret-down-fill" id="-item_name"></i></th>
+                <th>Item Description <i class="bi bi-caret-down-fill" id="-item_description"></i></th>
+            </tr>
+        </thead>
+        <tbody>   
+            <tr>
+                <td>{{ form.item }}</td>
+                <td>{{ form.item_description }}</td>
+                <td>{{ form.category }}</td>
+                <td><input type="submit" value="Submit"></td>           
+            </tr>
+            {% for item in data %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.item }}</td>
+                    <td>{{ item.item_description }}</td>
+                    <td>{{ item.category }}</td>
+                    <td class="delete" id="{{item.id}}">Delete</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    
+    </form>

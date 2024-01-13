@@ -10,41 +10,23 @@
     <title>Inventory</title>
 </head>
 <body>
-    <div id="content">
-        <form method="post" id="form"> {% csrf_token %}
-        <table>
-            <thead>
-                <th>Inventory</th>
-                <tr>
-                    <th>ID <i class="bi bi-caret-down-fill" id="-inventory"></i></th>
-                    <th>Item <i class="bi bi-caret-down-fill" id="-item"></i></th>
-                    <th>Amount <i class="bi bi-caret-down-fill" id="-amount"></i></th>
-                    <th></th>
-                    <th>Location <i class="bi bi-caret-down-fill" id="-location"></i></th>
-                </tr>
-            </thead>
-            <tbody>   
-                <tr>
-                    <td></td>
-                    <td>{{ form.item }}</td>
-                    <td>{{ form.amount }}</td>
-                    <td>{{ form.unit }}</td>
-                    <td>{{ form.location }}</td>
-                    <td><input type="submit" value="Submit"></td>           
-                </tr>
-                {% for item in data %}
-                    <tr>
-                        <td>{{ item.inventory }}</td>
-                        <td>{{ item.item }}</td>
-                        <td>{{ item.amount }}</td>
-                        <td>{{ item.unit }}</td>
-                        <td>{{ item.location }}</td>
-                        <td class="delete" id="{{item.id }}">Delete</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        
-        </form>
+    <div id="wrapper">
+    <div id="header">
+        <div id="tabs">
+            <a href="{% url 'index' %}?selected=inventory" id="inventory">Inventory</a>
+            <a href="{% url 'index' %}?selected=requests" id="requests">Request</a>
+            <a href="{% url 'index' %}?selected=add_item" id="addItem">Add Item</a> 
+            <a href="{% url 'logout' %}" id="logout">Logout</a>
         </div>
-</body>
+    </div>
+    
+    <div id="content"> 
+        <input type="text" id="search" placeholder="Search">
+    {% include defaultURL %}
+    </div>
+    
+    </div>
+    
+    
+    </body>
 </html>

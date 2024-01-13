@@ -20,19 +20,19 @@ def index(request):
         ordering = 'id'
         db = inventory
         q = db.objects.all().order_by(ordering)
-        # defaultURL = 'inventory/inventory.html'
+        defaultURL = 'inventory/inventory.html'
     elif selected == 'requests':
         form = onRequestForm(request.POST or None)
         ordering = 'id'
         db = on_request
         q = db.objects.all().order_by(ordering)
-        # defaultURL = 'inventory/requests.html'
+        defaultURL = 'inventory/requests.html'
     elif selected == 'add_item':
         form = itemAddForm(request.POST or None)
         ordering = 'item'
         db = item
         q = db.objects.all().order_by(ordering)
-        # defaultURL = 'inventory/add_item.html'        
+        defaultURL = 'inventory/add_item.html'        
 
     #check if order_by is set and update the query accordingly
     if 'order_by' in request.GET:
@@ -53,7 +53,7 @@ def index(request):
 
     #save finalized values and render page
     context = {
-        # 'defaultURL': defaultURL,
+        'defaultURL': defaultURL,
         'form': form,
         'data': q
     }
