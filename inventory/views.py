@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from .forms import onRequestForm, inventoryAddForm, itemAddForm
 from .models import inventory, on_request, item
-# from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required
 
 #main view when calling url/inventory
 #loads different defaults based on selected link
 #update the defaults with the selected section including the forms, the databases, the order_by, and the query
-# @login_required
+@login_required
 def index(request):
     #check if specific template is called to load, and if not set default
     if 'selected' in request.GET:
