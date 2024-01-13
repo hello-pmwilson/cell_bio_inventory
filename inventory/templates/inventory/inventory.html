@@ -4,7 +4,7 @@
         <thead>
             <th>Inventory</th>
             <tr>
-                <th>ID <i class="bi bi-caret-down-fill" id="-inventory"></i></th>
+                <th>ID <i class="bi bi-caret-down-fill" id="-id"></i></th>
                 <th>Item <i class="bi bi-caret-down-fill" id="-item"></i></th>
                 <th>Amount <i class="bi bi-caret-down-fill" id="-amount"></i></th>
                 <th></th>
@@ -22,7 +22,7 @@
             </tr>
             {% for item in data %}
                 <tr>
-                    <td>{{ item.inventory }}</td>
+                    <td>{{ item.id }}</td>
                     <td>{{ item.item }}</td>
                     <td>{{ item.amount }}</td>
                     <td>{{ item.unit }}</td>
