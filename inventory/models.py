@@ -21,15 +21,7 @@ class status(models.Model):
         return self.status
     class Meta:
         verbose_name = "Status"
-        verbose_name_plural = "Statuses"
-    
-status_options = [
-('submitted', 'Submitted'),
-('approved', 'Approved'),
-('pending', 'Pending'),
-('requested', 'Requested'),
-('ordered', 'Ordered'),
-]
+        verbose_name_plural = "Status"
 # when requesting or ordering or etc items 
 # current status indicates what stage the order/request/etc is in
 
@@ -41,22 +33,10 @@ class category(models.Model):
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = "Categories"
-    
-category_options = [
-('glassware', 'Glassware'),
-('equipment', 'Equipment'),
-('chemical', 'Chemical'),
-('reagent', 'Reagent'),
-('biological', 'Biological'),
-('consumable', 'Consumable'),
-('instrument', 'Instrument'),
-('miscellaneous', 'Miscellaneous')
-]
 # when creating an item
 # category references what type of thing the item is, for later filtering
 
 class item(models.Model):
-    id = models.AutoField(primary_key=True)
     item = models.CharField(max_length=100, default="thing(s)")
     item_description = models.TextField()
     category = models.ForeignKey(category, on_delete=models.SET_DEFAULT, default="lab stuff")
@@ -78,10 +58,10 @@ class inventory(models.Model):
     item = models.ForeignKey(item, on_delete=models.CASCADE)
     amount = models.PositiveSmallIntegerField()
     unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default="unit(s)")
-    location_name = models.ForeignKey(location, on_delete=models.SET_DEFAULT, default="lab")
+    location = models.ForeignKey(location, on_delete=models.SET_DEFAULT, default="lab")
 
     def __str__(self):
-        return self.item 
+        return f"{self.item}"
     class Meta:
         verbose_name = "Inventory"
         verbose_name_plural = "Inventory"
