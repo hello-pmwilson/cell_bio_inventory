@@ -60,7 +60,12 @@ def index(request):
     
     #if delete is selected on a record, delete the record
     if 'delete' in request.GET:
-        id = request.GET['delete']
+        delete = request.GET['delete'].split(',')
+        id = delete[0]
+        if delete[1] == 'units':
+            db = unit
+        elif delete[1] == 'locations':
+            db = location
         record = db.objects.get(pk=id)
         record.delete()
 

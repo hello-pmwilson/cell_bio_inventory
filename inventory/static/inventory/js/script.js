@@ -85,17 +85,6 @@ function getQueryURL() {
     }
 }
 
-function findRow(id) {
-    var rows = $('tbody').find('tr:not(:first)'); //grab all the rows excluding the form
-    for (var i = 0; i < rows.length; i++) {
-        var row = rows[i]
-        var cell = row.getElementsByTagName('td'); //grab the id, then check if it matches the provided id
-        if (cell[0].innerHTML.toString() == id) {
-            return row;   
-        }
-    }
-}
-
 //when the table is loaded or reloaded after page refresh/ajax/etc
 //call functions that set event listeners for the table
 function onTableLoad() {
@@ -119,8 +108,11 @@ function setRowHover() {
 function setDeleteButtons() {
         //delete a record from the db
         $('.delete').click(function(e) {
-            let id = e.target.id;
-            url = getQueryURL() + `delete=${id}`;
+            let id = e.target.closest('tr').id; //the id of the element to delete from the db
+            let formID = e.target.closest('form').id; //the db to delete it from
+            let row = e.target.closest('tr'); //the row which will be removed from the page upon deletion
+
+            url = getQueryURL() + `delete=${id},${formID}`;
     
             if (url.includes('add_item')) {
                 var userConfirm = confirm('Wait! Deleting an item from this database will delete all records with this item across all databases.\nDo you still want to delete?');
@@ -134,16 +126,11 @@ function setDeleteButtons() {
                 url: url,
                 type: 'GET',
                 success: function() {
-                    var row = findRow(id.toString());
-                    row.style.display = 'none';
+                    row.style.display = "none";
                 },
                 error: function(error) {
                     console.error('Error:', error);
                 }
             });
         })
-}
-
-function deleteRow() {
-    
 }

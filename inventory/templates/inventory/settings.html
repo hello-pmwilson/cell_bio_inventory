@@ -1,5 +1,5 @@
 <div id="content">
-    <form method="post" id="form"> {% csrf_token %}
+    <form method="post" id="units"> {% csrf_token %}
     <table>
         <thead>
             <th>Units</th>
@@ -15,17 +15,17 @@
                 <td><input type="submit" value="Submit"></td>           
             </tr>
             {% for item in data.0 %}
-                <tr>
+                <tr id="{{item.id }}">
                     <td>{{ item.id }}</td>
                     <td>{{ item.unit }}</td>
-                    <td class="delete" id="{{item.id }}">Delete</td>
+                    <td class="delete">Delete</td>
                 </tr>
             {% endfor %}
         </tbody>
-    
+    </table>
     </form>
 
-    <form method="post" id="form"> {% csrf_token %}
+    <form method="post" id="locations"> {% csrf_token %}
         <table>
             <thead>
                 <th>Locations</th>
@@ -35,20 +35,20 @@
                 </tr>
             </thead>
             <tbody>   
-                <tr>
+                <tr >
                     <td></td>
                     <td>{{ form.1.location }}</td>
                     <td><input type="submit" value="Submit"></td>           
                 </tr>
                 {% for item in data.1 %}
-                    <tr>
+                    <tr id="{{item.id }}">
                         <td>{{ item.id }}</td>
                         <td>{{ item.location }}</td>
-                        <td class="delete" id="{{item.id }}">Delete</td>
+                        <td class="delete">Delete</td>
                     </tr>
                 {% endfor %}
             </tbody>
-        
+        </table>
         </form>
 
 

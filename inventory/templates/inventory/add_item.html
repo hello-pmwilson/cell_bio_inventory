@@ -18,12 +18,12 @@
                 <td><input type="submit" value="Submit"></td>           
             </tr>
             {% for item in data %}
-                <tr>
+                <tr id="{{item.id }}">
                     <td>{{ item.id }}</td>
                     <td>{{ item.item }}</td>
                     <td>{{ item.item_description }}</td>
                     <td>{{ item.category }}</td>
-                    <td class="delete" id="{{item.id}}">Delete</td>
+                    <td class="delete">Delete</td>
                 </tr>
             {% endfor %}
         </tbody>
