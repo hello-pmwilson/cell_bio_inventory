@@ -1,0 +1,55 @@
+<div id="content">
+    <form method="post" id="form"> {% csrf_token %}
+    <table>
+        <thead>
+            <th>Units</th>
+            <tr>
+                <th>ID</th>
+                <th>Unit</th>
+            </tr>
+        </thead>
+        <tbody>   
+            <tr>
+                <td></td>
+                <td>{{ form.0.unit }}</td>
+                <td><input type="submit" value="Submit"></td>           
+            </tr>
+            {% for item in data.0 %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.unit }}</td>
+                    <td class="delete" id="{{item.id }}">Delete</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    
+    </form>
+
+    <form method="post" id="form"> {% csrf_token %}
+        <table>
+            <thead>
+                <th>Locations</th>
+                <tr>
+                    <th>ID</th>
+                    <th>Locations</th>
+                </tr>
+            </thead>
+            <tbody>   
+                <tr>
+                    <td></td>
+                    <td>{{ form.1.location }}</td>
+                    <td><input type="submit" value="Submit"></td>           
+                </tr>
+                {% for item in data.1 %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.location }}</td>
+                        <td class="delete" id="{{item.id }}">Delete</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        
+        </form>
+
+
+    </div>

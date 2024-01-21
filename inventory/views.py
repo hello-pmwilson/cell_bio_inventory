@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import onRequestForm, inventoryAddForm, itemAddForm
-from .models import inventory, on_request, item
+from .forms import onRequestForm, inventoryAddForm, itemAddForm, unitForm, locationForm
+from .models import inventory, on_request, item, unit, location
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 
@@ -36,8 +36,12 @@ def index(request):
         ordering = 'item'
         db = item
         q = db.objects.all().order_by(ordering)
-        defaultURL = 'inventory/add_item.html'        
-
+        defaultURL = 'inventory/add_item.html' 
+    elif selected == 'settings':
+        form = [unitForm(request.POST or None), locationForm(request.POST or None)]
+        q = [unit.objects.all(), location.objects.all()]
+        defaultURL = 'inventory/settings.html'  
+    
     #check if order_by is set and update the query accordingly
     if 'order_by' in request.GET:
         ordering = request.GET['order_by']
@@ -45,9 +49,14 @@ def index(request):
     
     #if form submitted, check validity and save
     if request.method == "POST":
-        if form.is_valid():
-            form.save()
-            return redirect(request.get_full_path())
+        print('look HERE form ONE:')
+        print(form[0])
+        print("look here for form 2")
+        print(form[1]) 
+        for possiblySubmittedForm in form:
+            if possiblySubmittedForm.is_valid():
+                possiblySubmittedForm.save()
+                return redirect(request.get_full_path())
     
     #if delete is selected on a record, delete the record
     if 'delete' in request.GET:
