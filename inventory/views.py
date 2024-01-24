@@ -49,13 +49,14 @@ def index(request):
     
     #if form submitted, check validity and save
     if request.method == "POST":
-        print('look HERE form ONE:')
-        print(form[0])
-        print("look here for form 2")
-        print(form[1]) 
-        for possiblySubmittedForm in form:
-            if possiblySubmittedForm.is_valid():
-                possiblySubmittedForm.save()
+        if type(form) is list:
+            for possiblySubmittedForm in form:
+                if possiblySubmittedForm.is_valid():
+                    possiblySubmittedForm.save()
+                    return redirect(request.get_full_path())
+        else:
+            if form.is_valid():
+                form.save()
                 return redirect(request.get_full_path())
     
     #if delete is selected on a record, delete the record

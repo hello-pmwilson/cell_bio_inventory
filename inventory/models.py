@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_migrate
+from django.dispatch import receiver
 
 class unit(models.Model):
     unit = models.CharField(max_length=10, default="unit(s)")
@@ -57,7 +59,7 @@ class vendor(models.Model):
 class inventory(models.Model):
     item = models.ForeignKey(item, on_delete=models.CASCADE)
     amount = models.PositiveSmallIntegerField()
-    unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default="unit(s)")
+    unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default=19)
     location = models.ForeignKey(location, on_delete=models.SET_DEFAULT, default="lab")
 
     def __str__(self):
@@ -74,7 +76,7 @@ class purchase_reference(models.Model):
     catalog = models.CharField(max_length=25)
     price = models.PositiveSmallIntegerField()
     amount = models.PositiveSmallIntegerField()
-    unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default="unit(s)")
+    unit = models.ForeignKey(unit, on_delete=models.CASCADE)
     
 
     class Meta:
@@ -87,7 +89,7 @@ class purchase_reference(models.Model):
 class on_request(models.Model):
     item = models.ForeignKey(item, on_delete=models.CASCADE)
     amount = models.PositiveSmallIntegerField()
-    unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default="unit(s)")
+    unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default=19)
     status = models.ForeignKey(status, on_delete=models.SET_DEFAULT, default="in the void")
 
     class Meta:
