@@ -3,20 +3,14 @@
     <table>
         <thead>
             <th>Units</th>
-            <tr>
-                <th>ID</th>
-                <th>Unit</th>
-            </tr>
         </thead>
         <tbody>   
             <tr>
-                <td></td>
                 <td>{{ form.0.unit }}</td>
                 <td><input type="submit" value="Submit"></td>           
             </tr>
             {% for item in data.0 %}
-                <tr id="{{item.id }}">
-                    <td>{{ item.id }}</td>
+                <tr id="{{item.unit }}">
                     <td>{{ item.unit }}</td>
                     <td class="delete">Delete</td>
                 </tr>
@@ -29,20 +23,14 @@
         <table>
             <thead>
                 <th>Locations</th>
-                <tr>
-                    <th>ID</th>
-                    <th>Locations</th>
-                </tr>
             </thead>
             <tbody>   
-                <tr >
-                    <td></td>
+                <tr>
                     <td>{{ form.1.location }}</td>
                     <td><input type="submit" value="Submit"></td>           
                 </tr>
                 {% for item in data.1 %}
-                    <tr id="{{item.id }}">
-                        <td>{{ item.id }}</td>
+                    <tr id="{{item.location }}">
                         <td>{{ item.location }}</td>
                         <td class="delete">Delete</td>
                     </tr>
