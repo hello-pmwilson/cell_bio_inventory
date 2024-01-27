@@ -1,7 +1,7 @@
 from django.db import models
 
 class unit(models.Model):
-    unit = models.CharField(max_length=10, default="unit(s)")
+    unit = models.CharField(max_length=10, default="unit(s)", unique=True)
     unit_category = models.CharField(max_length=10)
 
     def __str__(self):
@@ -9,14 +9,14 @@ class unit(models.Model):
 # options for units to choose from
 
 class location(models.Model):
-    location = models.CharField(max_length=50, default="lab")
+    location = models.CharField(max_length=50, default="lab", unique=True)
 
     def __str__(self):
         return self.location  
 # options for locations to choose from
 
 class status(models.Model):
-    status = models.CharField(max_length=10, default="in the void")
+    status = models.CharField(max_length=10, default="in the void", unique=True)
 
     def __str__(self):
         return self.status
@@ -27,7 +27,7 @@ class status(models.Model):
 # current status indicates what stage the order/request/etc is in
 
 class category(models.Model):
-    category = models.CharField(max_length=20, default="lab stuff")
+    category = models.CharField(max_length=20, default="lab stuff", unique=True)
 
     def __str__(self):
         return self.category
@@ -38,7 +38,7 @@ class category(models.Model):
 # category references what type of thing the item is, for later filtering
 
 class item(models.Model):
-    item = models.CharField(max_length=100, default="thing(s)")
+    item = models.CharField(max_length=100, default="thing(s)", unique=True)
     item_description = models.TextField()
     category = models.ForeignKey(category, on_delete=models.CASCADE)
 

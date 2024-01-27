@@ -4,9 +4,10 @@
         <thead>
             <th>Units</th>
         </thead>
-        <tbody>   
+        <tbody>  
+            <tr> {{ form.0.unit.errors }}</tr> 
             <tr>
-                <td>{{ form.0.unit }}</td>
+                <td>{{ form.0.unit }} </td> 
                 <td>{{ form.0.unit_category }}</td>
                 <td><input type="submit" value="Submit"></td>           
             </tr>
@@ -26,7 +27,8 @@
             <thead>
                 <th>Locations</th>
             </thead>
-            <tbody>   
+            <tbody>  
+                <tr> {{ form.1.location.errors }}</tr>
                 <tr>
                     <td>{{ form.1.location }}</td>
                     <td><input type="submit" value="Submit"></td>           
