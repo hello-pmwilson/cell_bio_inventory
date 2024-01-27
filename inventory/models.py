@@ -3,14 +3,14 @@ from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 
 class unit(models.Model):
-    unit = models.CharField(max_length=10, default="unit(s)")
+    unit = models.CharField(primary_key=True, max_length=10, default="unit(s)")
 
     def __str__(self):
         return self.unit
 # options for units to choose from
 
 class location(models.Model):
-    location = models.CharField(max_length=50, default="lab")
+    location = models.CharField(primary_key=True, max_length=50, default="lab")
 
     def __str__(self):
         return self.location  
