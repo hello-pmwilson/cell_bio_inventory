@@ -3,6 +3,7 @@ from .forms import onRequestForm, inventoryAddForm, itemAddForm, unitForm, locat
 from .models import inventory, on_request, item, unit, location
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
+from django.db import connection
 
 
 
@@ -49,9 +50,13 @@ def index(request):
     
     #if form submitted, check validity and save
     if request.method == "POST":
+        print(request.POST)
+
         if type(form) is list:
             for possiblySubmittedForm in form:
+                print(form)
                 if possiblySubmittedForm.is_valid():
+                    print('valid')
                     possiblySubmittedForm.save()
                     return redirect(request.get_full_path())
         else:
@@ -68,6 +73,7 @@ def index(request):
         elif delete[1] == 'locations':
             db = location
         record = db.objects.get(pk=id)
+        print("delete would've happened")
         record.delete()
 
     #save finalized values and render page

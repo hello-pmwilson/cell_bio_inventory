@@ -120,6 +120,11 @@ function setDeleteButtons() {
                     return; //if user hit cancels, exit the function and do not delete
                 }
             }
+
+            if (url.includes('1,units') || url.includes('1,location')) {
+                alert('Sorry, This value is set as the default. You cannot delete it.');
+                return
+            }
             
     
             $.ajax({

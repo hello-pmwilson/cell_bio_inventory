@@ -7,11 +7,13 @@
         <tbody>   
             <tr>
                 <td>{{ form.0.unit }}</td>
+                <td>{{ form.0.unit_category }}</td>
                 <td><input type="submit" value="Submit"></td>           
             </tr>
             {% for item in data.0 %}
-                <tr id="{{item.unit }}">
+                <tr id="{{item.id }}">
                     <td>{{ item.unit }}</td>
+                    <td>{{ item.unit_category }}</td>
                     <td class="delete">Delete</td>
                 </tr>
             {% endfor %}
@@ -30,7 +32,7 @@
                     <td><input type="submit" value="Submit"></td>           
                 </tr>
                 {% for item in data.1 %}
-                    <tr id="{{item.location }}">
+                    <tr id="{{item.id }}">
                         <td>{{ item.location }}</td>
                         <td class="delete">Delete</td>
                     </tr>

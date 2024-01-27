@@ -1,16 +1,15 @@
 from django.db import models
-from django.db.models.signals import post_migrate
-from django.dispatch import receiver
 
 class unit(models.Model):
-    unit = models.CharField(primary_key=True, max_length=10, default="unit(s)")
+    unit = models.CharField(max_length=10, default="unit(s)")
+    unit_category = models.CharField(max_length=10)
 
     def __str__(self):
         return self.unit
 # options for units to choose from
 
 class location(models.Model):
-    location = models.CharField(primary_key=True, max_length=50, default="lab")
+    location = models.CharField(max_length=50, default="lab")
 
     def __str__(self):
         return self.location  
@@ -41,7 +40,7 @@ class category(models.Model):
 class item(models.Model):
     item = models.CharField(max_length=100, default="thing(s)")
     item_description = models.TextField()
-    category = models.ForeignKey(category, on_delete=models.SET_DEFAULT, default="lab stuff")
+    category = models.ForeignKey(category, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.item
@@ -59,8 +58,8 @@ class vendor(models.Model):
 class inventory(models.Model):
     item = models.ForeignKey(item, on_delete=models.CASCADE)
     amount = models.PositiveSmallIntegerField()
-    unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default=19)
-    location = models.ForeignKey(location, on_delete=models.SET_DEFAULT, default="lab")
+    unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default=1)
+    location = models.ForeignKey(location, on_delete=models.SET_DEFAULT, default=1)
 
     def __str__(self):
         return f"{self.item}"
@@ -76,7 +75,7 @@ class purchase_reference(models.Model):
     catalog = models.CharField(max_length=25)
     price = models.PositiveSmallIntegerField()
     amount = models.PositiveSmallIntegerField()
-    unit = models.ForeignKey(unit, on_delete=models.CASCADE)
+    unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default=1)
     
 
     class Meta:
@@ -89,8 +88,8 @@ class purchase_reference(models.Model):
 class on_request(models.Model):
     item = models.ForeignKey(item, on_delete=models.CASCADE)
     amount = models.PositiveSmallIntegerField()
-    unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default=19)
-    status = models.ForeignKey(status, on_delete=models.SET_DEFAULT, default="in the void")
+    unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default=1)
+    status = models.ForeignKey(status, on_delete=models.SET_DEFAULT, default=1)
 
     class Meta:
         verbose_name = "Request"
