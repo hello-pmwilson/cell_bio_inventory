@@ -48,19 +48,16 @@ def index(request):
     #if form submitted, check validity and save
     if request.method == "POST":
         if type(form) is list:
-            print("form type is list")
             for possiblySubmittedForm in form:
                 if possiblySubmittedForm.is_valid():
                         possiblySubmittedForm.save()
                         return redirect(request.get_full_path())
         if 'item_char' in request.POST:
-            print("item char in request")
             request.POST = request.POST.copy()
             check_item = request.POST['item_char']
             request.POST.pop('item_char', None)
             query, created = item.objects.get_or_create(item=check_item, defaults={'item_description':'TBD', 'category': category.objects.get(pk=1)})
             request.POST['item'] = item.objects.get(item=query).id
-        print(request.POST)
         if selected == 'inventory':
             form = inventoryAddForm(request.POST)
         elif selected == 'requests':
@@ -70,7 +67,6 @@ def index(request):
             form.save()
             return redirect(request.get_full_path())
         else:
-            print("form not valid")
             print(form.errors)
     
     #if delete is selected on a record, delete the record
@@ -82,7 +78,6 @@ def index(request):
         elif delete[1] == 'locations':
             db = location
         record = db.objects.get(pk=id)
-        print("delete would've happened")
         record.delete()
 
     #save finalized values and render page
