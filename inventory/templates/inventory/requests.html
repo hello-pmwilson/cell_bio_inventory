@@ -22,7 +22,13 @@
             {% for item in data %}
                 <tr  id="{{item.id }}">
                     <td>{{ item.id }}</td>
-                    <td>{{ item.item }}</td>
+                    <td>{{ item.item }}
+                        <datalist id="itemOptions">
+                            {% for item in itemList %}
+                            <option value="{{ item }}" ></option>
+                            {% endfor %}
+                        </datalist>
+                    </td>
                     <td>{{ item.amount }}</td>
                     <td>{{ item.unit }}</td>
                     <td>{{ item.status }}</td>

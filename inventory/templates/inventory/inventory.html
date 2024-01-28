@@ -14,7 +14,13 @@
         <tbody>   
             <tr>
                 <td></td>
-                <td>{{ form.item_char }}</td>
+                <td>{{ form.item_char }} 
+                    <datalist id="itemOptions">
+                        {% for item in itemList %}
+                        <option value="{{ item }}" ></option>
+                        {% endfor %}
+                    </datalist>
+                </td>
                 <td>{{ form.amount }}</td>
                 <td>{{ form.unit }}</td>
                 <td>{{ form.location }}</td>

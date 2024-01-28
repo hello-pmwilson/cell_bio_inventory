@@ -1,4 +1,11 @@
 $(document).ready(function() {
+    // var itemFormField = $('#item_char_field');
+    // if (itemFormField) {
+    //     itemFormField.list = 'itemOptions';
+    //     console.log("this bit happened")
+    // };
+
+    
     //as user types in the search bar, search through all cells in the table
     //skipping the form row, and update what is shown in the table based on matches
     //case insensitive

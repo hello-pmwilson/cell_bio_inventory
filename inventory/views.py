@@ -89,7 +89,8 @@ def index(request):
     context = {
         'defaultURL': defaultURL,
         'form': form,
-        'data': q
+        'data': q,
+        'itemList': item.objects.all()
     }
 
     return render(request, 'inventory/index.html', context)
