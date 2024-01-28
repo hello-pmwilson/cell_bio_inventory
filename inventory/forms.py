@@ -2,11 +2,15 @@ from django import forms
 from .models import on_request, inventory, item, unit, location
 
 class onRequestForm(forms.ModelForm):
+    item_char = forms.CharField(max_length=100, required=False)
+    
     class Meta:
         model = on_request
         fields = "__all__"
 
 class inventoryAddForm(forms.ModelForm):
+    item_char = forms.CharField(max_length=100, required=False)
+
     class Meta:
         model = inventory
         fields = "__all__"

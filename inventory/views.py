@@ -1,11 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import onRequestForm, inventoryAddForm, itemAddForm, unitForm, locationForm
-from .models import inventory, on_request, item, unit, location
+from .models import inventory, on_request, item, unit, location, category
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from django.db import IntegrityError
-
-
 
 #main view when calling url/inventory
 #loads different defaults based on selected link
@@ -51,15 +48,30 @@ def index(request):
     #if form submitted, check validity and save
     if request.method == "POST":
         if type(form) is list:
+            print("form type is list")
             for possiblySubmittedForm in form:
                 if possiblySubmittedForm.is_valid():
                         possiblySubmittedForm.save()
                         return redirect(request.get_full_path())
-                
+        if 'item_char' in request.POST:
+            print("item char in request")
+            request.POST = request.POST.copy()
+            check_item = request.POST['item_char']
+            request.POST.pop('item_char', None)
+            query, created = item.objects.get_or_create(item=check_item, defaults={'item_description':'TBD', 'category': category.objects.get(pk=1)})
+            request.POST['item'] = item.objects.get(item=query).id
+        print(request.POST)
+        if selected == 'inventory':
+            form = inventoryAddForm(request.POST)
+        elif selected == 'requests':
+            form = onRequestForm(request.POST)
+             
+        if form.is_valid():
+            form.save()
+            return redirect(request.get_full_path())
         else:
-            if form.is_valid():
-                form.save()
-                return redirect(request.get_full_path())
+            print("form not valid")
+            print(form.errors)
     
     #if delete is selected on a record, delete the record
     if 'delete' in request.GET:
