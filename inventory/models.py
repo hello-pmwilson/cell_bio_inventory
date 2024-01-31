@@ -2,17 +2,21 @@ from django.db import models
 
 class unit(models.Model):
     unit = models.CharField(max_length=10, default="unit(s)", unique=True)
-    unit_category = models.CharField(max_length=10)
+    unit_category = models.CharField(max_length=10, default="count")
 
     def __str__(self):
         return self.unit
 # options for units to choose from
 
 class location(models.Model):
-    location = models.CharField(max_length=50, default="lab", unique=True)
+    lab = models.CharField(max_length=25, default="lab")
+    location = models.CharField(max_length=50, default="lab")
+
+    class Meta:
+        unique_together = ('lab', 'location')
 
     def __str__(self):
-        return self.location  
+        return f"{self.lab} {self.location}"  
 # options for locations to choose from
 
 class status(models.Model):
@@ -57,9 +61,10 @@ class vendor(models.Model):
 
 class inventory(models.Model):
     item = models.ForeignKey(item, on_delete=models.CASCADE)
-    amount = models.PositiveSmallIntegerField()
+    amount = models.PositiveSmallIntegerField(default="1")
     unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default=1)
     location = models.ForeignKey(location, on_delete=models.SET_DEFAULT, default=1)
+    notes = models.TextField(null=True)
 
     def __str__(self):
         return f"{self.item}"

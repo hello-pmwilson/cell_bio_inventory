@@ -56,7 +56,7 @@ def index(request):
             request.POST = request.POST.copy()
             check_item = request.POST['item_char']
             request.POST.pop('item_char', None)
-            query, created = item.objects.get_or_create(item=check_item, defaults={'item_description':'TBD', 'category': category.objects.get(pk=1)})
+            query, created = item.objects.get_or_create(item=check_item, defaults={'item_description':'TBD', 'category': category.objects.getpk=1)})
             request.POST['item'] = item.objects.get(item=query).id
         if selected == 'inventory':
             form = inventoryAddForm(request.POST)
