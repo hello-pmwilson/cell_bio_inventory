@@ -40,6 +40,7 @@ CSRF_TRUSTED_ORIGINS = ["https://django-server-production-a2de.up.railway.app"]
 
 INSTALLED_APPS = [
     'inventory.apps.InventoryConfig',
+    'django_extensions',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
