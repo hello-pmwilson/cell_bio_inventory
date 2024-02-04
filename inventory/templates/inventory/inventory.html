@@ -24,6 +24,7 @@
                 <td>{{ form.amount }}</td>
                 <td>{{ form.unit }}</td>
                 <td>{{ form.location }}</td>
+                <td>{{ form.notes }}</td>
                 <td><input type="submit" value="Submit"></td>           
             </tr>
             {% for item in data %}
@@ -33,6 +34,7 @@
                     <td>{{ item.amount }}</td>
                     <td>{{ item.unit }}</td>
                     <td>{{ item.location }}</td>
+                    <td>{{ item.notes }}</td>
                     <td class="delete">Delete</td>
                 </tr>
             {% endfor %}

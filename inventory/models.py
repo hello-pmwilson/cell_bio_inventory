@@ -64,7 +64,7 @@ class inventory(models.Model):
     amount = models.PositiveSmallIntegerField(default="1")
     unit = models.ForeignKey(unit, on_delete=models.SET_DEFAULT, default=1)
     location = models.ForeignKey(location, on_delete=models.SET_DEFAULT, default=1)
-    notes = models.TextField(null=True)
+    notes = models.TextField(null=True, blank=True, default=None) 
 
     def __str__(self):
         return f"{self.item}"
