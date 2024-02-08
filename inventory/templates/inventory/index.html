@@ -11,24 +11,24 @@
     <title>Inventory</title>
 </head>
 <body>
-    <div id="wrapper">
+<div id="wrapper">
     <div id="header">
-        <div id="tabs">
-            <a href="{% url 'index' %}?selected=inventory" id="inventory">Inventory</a>
-            <a href="{% url 'index' %}?selected=requests" id="requests">Request</a>
-            <a href="{% url 'index' %}?selected=add_item" id="addItem">Add Item</a> 
-            <a href="{% url 'index' %}?selected=settings" id="settings">Settings</a>
-            <a href="{% url 'logout' %}" id="logout">Logout</a>
+        <a href="{% url 'logout' %}" id="logout">Logout</a>
+    </div>
+    <div id="content">
+    <div id="navigation">
+        <a class="tab" href="{% url 'index' %}?selected=inventory" id="inventory">Inventory</a>
+        <a class="tab" href="{% url 'index' %}?selected=requests" id="requests">Request</a>
+        <a class="tab" href="{% url 'index' %}?selected=add_item" id="addItem">Add Item</a> 
+        <a class="tab" href="{% url 'index' %}?selected=settings" id="settings">Settings</a> 
+    </div>
+    <div id="data">
+        <div id="data-header">
+            <input type="text" id="search" placeholder="Search">
         </div>
+        
+        {% include defaultURL %}
     </div>
-    
-    <div id="content"> 
-        <input type="text" id="search" placeholder="Search">
-    {% include defaultURL %}
-    </div>
-    
-    </div>
-    
-    
-    </body>
+</div> 
+</body>
 </html>

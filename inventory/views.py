@@ -89,3 +89,6 @@ def index(request):
     }
 
     return render(request, 'inventory/index.html', context)
+
+def skeleton(request):
+    return render(request, 'inventory/skeleton.html')

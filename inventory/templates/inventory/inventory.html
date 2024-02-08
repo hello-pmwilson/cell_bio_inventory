@@ -1,6 +1,7 @@
 <div id="content">
     <form method="post" id="form"> {% csrf_token %}
     <table>
+        <div class="sticky">
         <thead>
             <th>Inventory</th>
             <tr>
@@ -27,6 +28,7 @@
                 <td>{{ form.notes }}</td>
                 <td><input type="submit" value="Submit"></td>           
             </tr>
+        </div>
             {% for item in data %}
                 <tr  id="{{item.id }}">
                     <td>{{ item.id }}</td>

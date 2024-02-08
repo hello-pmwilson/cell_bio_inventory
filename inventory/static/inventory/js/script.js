@@ -124,7 +124,7 @@ function setDeleteButtons() {
             if (url.includes('add_item')) {
                 var userConfirm = confirm('Wait! Deleting an item from this database will delete all records with this item across all databases.\nDo you still want to delete?');
                 if (!userConfirm) {
-                    return; //if user hit cancels, exit the function and do not delete
+                    return; //if user hits cancel, exit the function and do not delete
                 }
             }
 
