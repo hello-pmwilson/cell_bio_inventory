@@ -87,7 +87,6 @@ def index(request):
         'data': q,
         'itemList': item.objects.all()
     }
-
     return render(request, 'inventory/index.html', context)
 
 def skeleton(request):

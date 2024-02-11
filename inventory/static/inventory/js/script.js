@@ -69,15 +69,36 @@ $(document).ready(function() {
     const requestTab = $("#requests")
     const addItemTab = $("#addItem")
     const settingsTab = $("#settings")
+
+    
     //when selecting new tabs, change the color of the page. get the color from the tabColors object
     var tabs = $(".tab")
     tabs.click(function(e) {
+        //change the color
         var primaryColor = tabColors[e.target.id][0];
         var secondaryColor = tabColors[e.target.id][1];
         tabs.addClass("inactive");
         $(e.target).removeClass("inactive");
-        $('html').css('--primary-color', primaryColor)
-        $('html').css('--secondary-color', secondaryColor)
+        $('html').css('--primary-color', primaryColor);
+        $('html').css('--secondary-color', secondaryColor);
+        //get the information to load
+        let queryURL = this.getAttribute('href')
+
+        //send get request and extract only the html we want to update
+        $.ajax({
+            url: queryURL,
+            type: 'GET',
+            dataType: 'html',
+            success: function(response) {
+                var data = $(response).find('#data-data').html();
+                console.log(data);
+                $("#data-data").html(data);
+            },
+            error: function(error) {
+                console.error('Error fetching new content:', error);
+            }
+        });
+
     })
 
 
