@@ -17,10 +17,10 @@
     </div>
     <div id="content">
     <div id="navigation">
-        <a class="tab" href="{% url 'index' %}?selected=inventory" id="inventory">Inventory</a>
-        <a class="tab" href="{% url 'index' %}?selected=requests" id="requests">Request</a>
-        <a class="tab" href="{% url 'index' %}?selected=add_item" id="addItem">Add Item</a> 
-        <a class="tab" href="{% url 'index' %}?selected=settings" id="settings">Settings</a> 
+        <div class="tab" href="{% url 'index' %}?selected=inventory" id="inventory">Inventory</div> 
+        <div class="tab inactive" href="{% url 'index' %}?selected=requests" id="requests">Request</div>
+        <div class="tab inactive" href="{% url 'index' %}?selected=add_item" id="addItem">Add Item</div>
+        <div class="tab inactive" href="{% url 'index' %}?selected=settings" id="settings">Settings</div>
     </div>
     <div id="data">
         <div id="data-header">

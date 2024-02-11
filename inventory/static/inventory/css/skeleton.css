@@ -5,9 +5,6 @@ body {
   margin: 0 auto;
   width: 95vw;
   height: 95vh;
-  display:grid;
-  grid-template-columns: 20% 80%;
-  grid-template-rows: 5% 95%;
 }
 
 #header {

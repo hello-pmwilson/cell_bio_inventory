@@ -1,11 +1,4 @@
 $(document).ready(function() {
-    // var itemFormField = $('#item_char_field');
-    // if (itemFormField) {
-    //     itemFormField.list = 'itemOptions';
-    //     console.log("this bit happened")
-    // };
-
-    
     //as user types in the search bar, search through all cells in the table
     //skipping the form row, and update what is shown in the table based on matches
     //case insensitive
@@ -65,6 +58,27 @@ $(document).ready(function() {
 
     onTableLoad(); //set event listeners for items in the table
 
+
+    const tabColors = {
+        "inventory": ["#aed9e0", "#93c8d3"], //blue
+        "requests": ["#a0d9bf", "#90c8ab"], //green
+        "addItem": ["#ffc0cb", "#ffb6c1"], //pink
+        "settings": ["#9c8bb1", "#817f9b"] //purple
+    }
+    const inventoryTab = $("#inventory")
+    const requestTab = $("#requests")
+    const addItemTab = $("#addItem")
+    const settingsTab = $("#settings")
+    //when selecting new tabs, change the color of the page. get the color from the tabColors object
+    var tabs = $(".tab")
+    tabs.click(function(e) {
+        var primaryColor = tabColors[e.target.id][0];
+        var secondaryColor = tabColors[e.target.id][1];
+        tabs.addClass("inactive");
+        $(e.target).removeClass("inactive");
+        $('html').css('--primary-color', primaryColor)
+        $('html').css('--secondary-color', secondaryColor)
+    })
 
 
 })
