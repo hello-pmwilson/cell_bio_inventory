@@ -1,32 +1,59 @@
-<div id="content">
+<h1 id="title">Inventory</h1>
+<div id="data-header">
+    <input type="text" id="search" placeholder="Search">
+</div>
+<div id="data-data">
+    <section id="column-header">
+        <h3 class="pid-column">ID <i class="bi bi-caret-down-fill filter" id="-id"></i></h3>
+        <h3 class="item-column">Item <i class="bi bi-caret-down-fill filter" id="-item"></i></h3>
+        <h3 class="amount-column">Amount <i class="bi bi-caret-down-fill filter" id="-amount"></i></h3>
+        <h3 class="unit-column">Unit<i class="bi bi-caret-down-fill filter" id="-unit"></i></h3>
+        <h3 class="location-column">Location <i class="bi bi-caret-down-fill filter" id="-location"></i></h3>  
+        <h3 class="notes-column">Notes <i class="bi bi-caret-down-fill filter" id="-description"></i></h3>  
+    </section>
+
     <form method="post" id="form"> {% csrf_token %}
-    <table>
+    <section>
+        <div class="pid-column"></div>
+        <div class="item-column">{{ form.item_char }} 
+            <datalist id="itemOptions">
+                {% for item in itemList %}
+                <option value="{{ item }}" ></option>
+                {% endfor %}
+            </datalist>
+        </div>
+        <div class="amount-column">{{ form.amount }}</div>
+        <div class="unit-cloumn">{{ form.unit }}</div>
+        <div class="location-column">{{ form.location }}</div>
+        <div class="notes-column">{{ form.notes }}</div>
+        <div class="edit-column"><input type="submit" value="Submit"></div>  
+    </section>
+    </form>
+{% for item in data %}
+    <section id="{{item.id}}">
+        <div class="pid-column">{{ item.id }}</div>
+        <div class="item-column">{{ item.item }}</div>
+        <div class="amount-column">{{ item.amount }}</div>
+        <div class="unit-cloumn">{{ item.unit }}</div>
+        <div class="location-column">{{ item.location }}</div>
+        <div class="notes-column">{{ item.notes }}</div>
+        <div class="edit-column delete">Delete</div>         
+    </section>
+{% endfor %}
+</div>
+
+
+
+   <!-- <table>
         <div class="sticky">
-        <thead>
-            <th>Inventory</th>
+        <thead></thead>
             <tr>
-                <th>ID <i class="bi bi-caret-down-fill" id="-id"></i></th>
-                <th>Item <i class="bi bi-caret-down-fill" id="-item"></i></th>
-                <th>Amount <i class="bi bi-caret-down-fill" id="-amount"></i></th>
-                <th></th>
-                <th>Location <i class="bi bi-caret-down-fill" id="-location"></i></th>
+
             </tr>
         </thead>
         <tbody>   
             <tr>
-                <td></td>
-                <td>{{ form.item_char }} 
-                    <datalist id="itemOptions">
-                        {% for item in itemList %}
-                        <option value="{{ item }}" ></option>
-                        {% endfor %}
-                    </datalist>
-                </td>
-                <td>{{ form.amount }}</td>
-                <td>{{ form.unit }}</td>
-                <td>{{ form.location }}</td>
-                <td>{{ form.notes }}</td>
-                <td><input type="submit" value="Submit"></td>           
+                <td></td>         
             </tr>
         </div>
             {% for item in data %}
@@ -42,5 +69,4 @@
             {% endfor %}
         </tbody>
     </table>
-    </form>
-    </div>
+    </div> -->

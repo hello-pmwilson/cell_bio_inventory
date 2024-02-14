@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'inventory/css/style.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'inventory/css/inventory_data.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'inventory/js/script.js' %}"></script>
     <title>Inventory</title>
@@ -23,12 +24,7 @@
         <div class="tab inactive" href="{% url 'index' %}?selected=settings" id="settings">Settings</div>
     </div>
     <div id="data">
-        <div id="data-header">
-            <input type="text" id="search" placeholder="Search">
-        </div>
-        <div id="data-data">
-            {% include defaultURL %}
-        </div>
+        {% include defaultURL %}
     </div>
 </div> 
 </body>
