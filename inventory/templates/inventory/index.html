@@ -24,8 +24,21 @@
         <div class="tab inactive" href="{% url 'index' %}?selected=settings" id="settings">Settings</div>
     </div>
     <div id="data">
-        {% include defaultURL %}
+        <svg id="bubble" height="100" width="100" xmlns="http://www.w3.org/2000/svg">
+            <circle r="5" cx="10" cy="10"/>
+        </svg> 
+        <svg id="bubble" height="100" width="100" xmlns="http://www.w3.org/2000/svg">
+            <circle r="5" cx="10" cy="10"/>
+        </svg>
+        <svg id="bubble" height="100" width="100" xmlns="http://www.w3.org/2000/svg">
+            <circle r="5" cx="10" cy="10"/>
+        </svg>         
+        <svg id="flask" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 15 15">
+            <path d="M1 8L3 5V1Q2.5.5 3 .5H5Q5.5.5 5 1V5L7 8Q8 10 7 10H1Q0 10 1 8"/>
+          </svg>
     </div>
 </div> 
 </body>
 </html>
+
+<!-- {% include defaultURL %} -->
