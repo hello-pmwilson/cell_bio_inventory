@@ -10,11 +10,14 @@ $(document).ready(function() {
         var d = i % 2 === 0 ? 0 : 1;
         loadingFlaskPath.attr("d", paths[d]);
         i++;
-        setTimeout(loopLoadingFlask, 500); // Wait half a second before calling the loop again
+        // setTimeout(loopLoadingFlask, 500); // Wait half a second before calling the loop again
         }
-    
-    // loopLoadingFlask(); // Start the loop
-    
+
+    loopLoadingFlask();
+    var loopLoadingFlask = setInterval(loopLoadingFlask,500);
+    setTimeout(function() {
+        clearInterval(loopLoadingFlask); // This will stop the interval
+      }, 5000);
 
     //as user types in the search bar, search through all cells in the table
     //skipping the form row, and update what is shown in the table based on matches
