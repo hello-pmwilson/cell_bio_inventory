@@ -10,6 +10,12 @@ from django.views.decorators.csrf import csrf_protect
 @login_required
 @csrf_protect
 def index(request):
+    print("index")
+    return render(request, 'inventory/index.html')
+
+
+def get_data(request):
+    print("get data")
     #check if specific template is called to load, and if not set default
     if 'selected' in request.GET:
         selected = request.GET['selected']
@@ -87,7 +93,7 @@ def index(request):
         'data': q,
         'itemList': item.objects.all()
     }
-    return render(request, 'inventory/index.html', context)
+    return render(request, defaultURL, context)
 
 def skeleton(request):
     return render(request, 'inventory/skeleton.html')

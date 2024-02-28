@@ -5,14 +5,14 @@ fix the form sizes - more responsive, less ugly
 #data-data {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 4fr 2fr 2fr 4fr 4fr 1fr;
+  grid-template-columns: 1fr 4fr 2fr 2fr 4fr 1fr;
   grid-template-rows: 1fr;
 }
 
 section {
   display: contents;
 }
-.form {
+form {
   display: contents;
 }
 
@@ -47,14 +47,10 @@ section {
   grid-column: 4;
 }
 
-.location-column {
+.status-column {
   grid-column: 5;
 }
 
-.notes-column {
-  grid-column: 6;
-}
-
 .edit-column {
-  grid-column: 7;
+  grid-column: 6;
 }

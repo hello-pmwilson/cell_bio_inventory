@@ -25,9 +25,15 @@ class inventoryAddForm(forms.ModelForm):
         self.fields['item_char'].widget = TextInput(attrs={'id': 'item_char_field', 'list': 'itemOptions'})
 
 class itemAddForm(forms.ModelForm):
+    item_char = forms.CharField(max_length=100, required=False)
+    
     class Meta:
         model = item
         fields = "__all__"
+    
+    def __init__(self, *args, **kwargs):
+        super(itemAddForm, self).__init__(*args, **kwargs)
+        self.fields['item_char'].widget = TextInput(attrs={'id': 'item_char_field', 'list': 'itemOptions'})
 
 class unitForm(forms.ModelForm):
     class Meta:

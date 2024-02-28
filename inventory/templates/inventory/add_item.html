@@ -1,31 +1,40 @@
-<form method="post" id="addItemForm"> {% csrf_token %}
-    <table>
-        <thead>
-            <th>Items</th>
-            <tr>
-                <th>ID<i class="bi bi-caret-down-fill" id="-id"></i></th>
-                <th>Item<i class="bi bi-caret-down-fill" id="-item"></i></th>
-                <th>Description<i class="bi bi-caret-down-fill" id="-item_description"></i></th>
-                <th>Category<i class="bi bi-caret-down-fill" id="-category__category"></i></th>
-            </tr>
-        </thead>
-        <tbody>   
-            <tr>
-                <td></td>
-                <td>{{ form.item }}</td>
-                <td>{{ form.item_description }}</td>
-                <td>{{ form.category }}</td>
-                <td><input type="submit" value="Submit"></td>           
-            </tr>
-            {% for item in data %}
-                <tr id="{{item.id }}">
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.item }}</td>
-                    <td>{{ item.item_description }}</td>
-                    <td>{{ item.category }}</td>
-                    <td class="delete">Delete</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+{% load static %}
+<script src="{% static 'inventory/js/script.js' %}"></script>
+<link rel="stylesheet" href="{% static 'inventory/css/add_item_data.css' %}">
+<h1 class="title">Items</h1>
+<div class="data-header">
+    <input type="text" class="search" placeholder="Search">
+</div>
+<div id="data-data">
+    <section class="column-header">
+        <h3 class="pid-column">ID <i class="bi bi-caret-down-fill filter" id="-id"></i></h3>
+        <h3 class="item-column">Item <i class="bi bi-caret-down-fill filter" id="-item"></i></h3>  
+        <h3 class="description">Description <i class="bi bi-caret-down-fill filter" id="-description"></i></h3>
+        <h3 class="category-column">Category <i class="bi bi-caret-down-fill filter" id="-category"></i></h3>  
+    </section>
+
+    <form method="post" class="form"> {% csrf_token %}
+    <section>
+        <div class="pid-column"></div>
+        <div class="item-column">{{ form.item_char }} 
+            <datalist id="itemOptions">
+                {% for item in itemList %}
+                <option value="{{ item }}" ></option>
+                {% endfor %}
+            </datalist>
+        </div>
+        <div class="description-column">{{ form.item_description }}</div>
+        <div class="category-column">{{ form.category }}</div>
+        <div class="edit-column"><input type="submit" value="Submit"></div>  
+    </section>
     </form>
+{% for item in data %}
+    <section id="{{item.id}}">
+        <div class="pid-column">{{ item.id }}</div>
+        <div class="item-column">{{ item.item }}</div>
+        <div class="description-column">{{ item.item_description }}</div>
+        <div class="category-column">{{ item.category }}</div>
+        <div class="edit-column delete">Delete</div>         
+    </section>
+{% endfor %}
+</div>

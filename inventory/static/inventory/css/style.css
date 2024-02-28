@@ -54,7 +54,7 @@ body {
   z-index: 1;
 }
 
-#data-header {
+.data-header {
   width: 85%;
   /* position: fixed; */
   display: flex;

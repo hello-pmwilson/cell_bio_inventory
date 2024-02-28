@@ -1,47 +1,61 @@
-<div id="content">
-    <form method="post" id="units"> {% csrf_token %}
-    <table>
-        <thead>
-            <th>Units</th>
-        </thead>
-        <tbody>  
-            <tr> {{ form.0.unit.errors }}</tr> 
-            <tr>
-                <td>{{ form.0.unit }} </td> 
-                <td>{{ form.0.unit_category }}</td>
-                <td><input type="submit" value="Submit"></td>           
-            </tr>
-            {% for item in data.0 %}
-                <tr id="{{item.id }}">
-                    <td>{{ item.unit }}</td>
-                    <td>{{ item.unit_category }}</td>
-                    <td class="delete">Delete</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+{% load static %}
+<script src="{% static 'inventory/js/script.js' %}"></script>
+<link rel="stylesheet" href="{% static 'inventory/css/settings_data.css' %}">
+
+<div id="unit-data">
+<h1 class="title">Units</h1>
+<div class="data-header">
+    <input type="text" class="search" placeholder="Search">
+</div>
+<div class="data-data">
+    <section class="column-header">
+        <h3 class="unit-column">Unit<i class="bi bi-caret-down-fill filter" id="-unit"></i></h3>
+        <h3 class="unit-category-column">Category<i class="bi bi-caret-down-fill filter" id="-unit_category"></i></h3>
+    </section>
+
+    <form method="post" class="form"> {% csrf_token %}
+    <section>
+        <!-- {{ form.0.unit.errors }} for including to display errors like 'unit already exists' -->
+        <div class="unit-column">{{ form.0.unit }}</div>
+        <div class="unit-category-column">{{ form.0.unit_category }}</div>
+        <div class="edit-column"><input type="submit" value="Submit"></div>  
+    </section>
     </form>
+{% for item in data.0 %}
+    <section id="{{item.id}}">
+        <div class="unit-column">{{ item.unit }}</div>
+        <div class="unit-category-column">{{ item.unit_category }}</div>
+        <div class="edit-column delete">Delete</div>         
+    </section>
+{% endfor %}
+</div>
+</div>
 
-    <form method="post" id="locations"> {% csrf_token %}
-        <table>
-            <thead>
-                <th>Locations</th>
-            </thead>
-            <tbody>  
-                <tr> {{ form.1.location.errors }}</tr>
-                <tr>
-                    <td>{{ form.1.location }}</td>
-                    <td><input type="submit" value="Submit"></td>           
-                </tr>
-                {% for item in data.1 %}
-                    <tr id="{{item.id }}">
-                        <td>{{ item.location }}</td>
-                        <td class="delete">Delete</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<div id="location-data">
+    <h1 class="title">Locations</h1>
+    <div class="data-header">
+        <input type="text" class="search" placeholder="Search">
+    </div>
+    <div class="data-data">
+        <section class="column-header">
+            <h3 class="lab-column">Lab<i class="bi bi-caret-down-fill filter" id="-lab"></i></h3>
+            <h3 class="location-column">Location<i class="bi bi-caret-down-fill filter" id="-location"></i></h3>
+</section>
+    
+        <form method="post" class="form"> {% csrf_token %}
+        <section>
+            <!-- {{ form.1.location.errors }} for including to display errors like 'location already exists' -->
+            <div class="lab-column">{{ form.1.lab }}</div>
+            <div class="location-column">{{ form.1.location }}</div>
+            <div class="edit-column"><input type="submit" value="Submit"></div>  
+        </section>
         </form>
-
-
+    {% for item in data.1 %}
+        <section id="{{item.id}}">
+            <div class="lab-column">{{ item.lab }}</div>
+            <div class="location-column">{{ item.location }}</div>
+            <div class="edit-column delete">Delete</div>         
+        </section>
+    {% endfor %}
+    </div>
     </div>

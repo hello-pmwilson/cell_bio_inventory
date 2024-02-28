@@ -1,0 +1,53 @@
+/*TODO 
+fix the grid column sizes - make better looking
+fix the form sizes - more responsive, less ugly
+*/
+#unit-data .data-data {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+#location-data .data-data {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+section {
+  display: contents;
+}
+form {
+  display: contents;
+}
+
+.filter {
+  font-size: small;
+}
+
+.unit-column {
+  grid-column: 1;
+}
+
+.unit-category-column {
+  grid-column: 2;
+}
+
+#unit-data .edit-column {
+  grid-column: 3;
+}
+
+.lab-column {
+  grid-column: 1;
+}
+
+.location-column {
+  grid-column: 2;
+}
+
+#location-data .edit-column {
+  grid-column: 3;
+}
+

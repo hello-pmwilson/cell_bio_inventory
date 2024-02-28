@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'inventory/css/style.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="{% static 'inventory/css/inventory_data.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'inventory/js/script.js' %}"></script>
+    <script src="{% static 'inventory/js/index.js' %}"></script>
     <title>Inventory</title>
 </head>
 <body>
@@ -18,12 +17,12 @@
     </div>
     <div id="content">
     <div id="navigation">
-        <div class="tab" href="{% url 'index' %}?selected=inventory" id="inventory">Inventory</div> 
-        <div class="tab inactive" href="{% url 'index' %}?selected=requests" id="requests">Request</div>
-        <div class="tab inactive" href="{% url 'index' %}?selected=add_item" id="addItem">Add Item</div>
-        <div class="tab inactive" href="{% url 'index' %}?selected=settings" id="settings">Settings</div>
+        <div class="tab" href="{% url 'get_data' %}?selected=inventory" id="inventory">Inventory</div> 
+        <div class="tab inactive" href="{% url 'get_data' %}?selected=requests" id="requests">Request</div>
+        <div class="tab inactive" href="{% url 'get_data' %}?selected=add_item" id="addItem">Add Item</div>
+        <div class="tab inactive" href="{% url 'get_data' %}?selected=settings" id="settings">Settings</div>
     </div>
-    <div id="data">        
+    <div id="data" defaulturl="{% url 'get_data' %}">        
         <svg id="loading-flask" xmlns="http://www.w3.org/2000/svg" width="50" height="100" viewBox="0 0 50 20">
             <path id="loading-flask-path" d="m8 53q-10 0-1-12l6-6v-18q-5-4 0-4h7q5 0 0 4v18l6 6q10 12 0 12h-18m6-39q-3 0 0 2v19l-6 6q5-3 11 1 4 2 6-1l-6-6v-19q3-2 0-2M15 5A1 1 0 0013 7 1 1 0 0015 5M21-2A1 1 0 0021 1 1 1 0 0021-2M15-13A1 1 0 0015-10 1 1 0 0015-13"/>
           </svg>              
@@ -31,5 +30,3 @@
 </div> 
 </body>
 </html>
-
-<!-- {% include defaultURL %} -->
