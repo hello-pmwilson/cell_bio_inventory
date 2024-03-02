@@ -1,5 +1,24 @@
 $(document).ready(function() {
     console.log("Hello, World");
+
+    //change background color when a user hovers over a row
+    $('section').slice(2).hover(
+        function() {
+            const children = this.children;
+            console.log(children);
+            for (let i =0; i<children.length; i++) {
+                $(children[i]).addClass('row-hover');
+            }
+        },
+        function() {
+            const children = this.children;
+            for (let i =0; i<children.length; i++) {
+                $(children[i]).removeClass('row-hover');
+            }            
+        }
+
+    );
+
     //as user types in the search bar, search through all cells in the table
     //skipping the form row, and update what is shown in the table based on matches
     //case insensitive

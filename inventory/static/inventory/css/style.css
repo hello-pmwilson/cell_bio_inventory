@@ -116,11 +116,9 @@ body {
 
 .delete {
   visibility: hidden;
-  width: 50px;
 }
 
-table {
-  border-spacing: 0px;
-  padding-top: 30px;
+.row-hover {
+  background-color: #74748d30;
 }
 
