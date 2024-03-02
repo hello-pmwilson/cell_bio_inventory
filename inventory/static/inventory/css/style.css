@@ -74,7 +74,7 @@ body {
 }
 
 .inactive {
-  background: linear-gradient(to left, #88888840 0%, #88888800 25%);
+  background: linear-gradient(to left, #74748d30 0%, #74748d00 20%);
   transform: scale(.95) translateX(5px);
 }
 
