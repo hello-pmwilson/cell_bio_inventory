@@ -1,11 +1,10 @@
 {% load static %}
 <script src="{% static 'inventory/js/script.js' %}"></script>
 <link rel="stylesheet" href="{% static 'inventory/css/settings_data.css' %}">
-
+<div class="search-bar"><input type="text" id="search" placeholder="Search"></div>
 <div id="unit-data">
 <h1 class="title">Units</h1>
 <div class="data-header">
-    <input type="text" class="search" placeholder="Search">
 </div>
 <div class="data-data">
     <section class="column-header">
@@ -34,7 +33,6 @@
 <div id="location-data">
     <h1 class="title">Locations</h1>
     <div class="data-header">
-        <input type="text" class="search" placeholder="Search">
     </div>
     <div class="data-data">
         <section class="column-header">

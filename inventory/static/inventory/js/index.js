@@ -1,7 +1,7 @@
 $(document).ready(function() {
-  var dataDiv = $("#data")
-  var defaultURL = dataDiv.attr("defaultURL")
+  //Load Data
   //When the page is called, make the API call for the data to load in
+  var defaultURL = $('#data').attr("defaultURL")
   $.ajax({
     url: defaultURL,
     type: 'GET',
@@ -16,7 +16,7 @@ $(document).ready(function() {
   });
 
   //Loading Animation - Loading Flask
-  //Thanks yqnn.github.io/svg-path-editor/ for the editor which was used to make the svg
+  //thanks yqnn.github.io/svg-path-editor/ for the editor which was used to make the svg
   var loadingFlaskPath = $("#loading-flask-path")
   const paths = [
       "m8 53q-10 0-1-12l6-6v-18q-5-4 0-4h7q5 0 0 4v18l6 6q10 12 0 12h-18m6-39q-3 0 0 2v19l-6 6q5-3 11 1 4 2 6-1l-6-6v-19q3-2 0-2M15 5A1 1 0 0013 7 1 1 0 0015 5M21-2A1 1 0 0021 1 1 1 0 0021-2M15-13A1 1 0 0015-10 1 1 0 0015-13",
@@ -35,19 +35,15 @@ $(document).ready(function() {
       clearInterval(loopLoadingFlask); // This will stop the interval after 5 seconds
     }, 5000);
 
-    const tabColors = {
-      "inventory": ["#aed9e0", "#93c8d3"], //blue
-      "requests": ["#a0d9bf", "#90c8ab"], //green
-      "addItem": ["#ffc0cb", "#ffb6c1"], //pink
-      "settings": ["#9c8bb1", "#817f9b"] //purple
+//Tabs
+  const tabColors = {
+    "inventory": ["#aed9e0", "#93c8d3"], //blue
+    "requests": ["#a0d9bf", "#90c8ab"], //green
+    "addItem": ["#ffc0cb", "#ffb6c1"], //pink
+    "settings": ["#9c8bb1", "#817f9b"] //purple
   }
-  const inventoryTab = $("#inventory")
-  const requestTab = $("#requests")
-  const addItemTab = $("#addItem")
-  const settingsTab = $("#settings")
 
-  
-  //when selecting new tabs, change the color of the page. get the color from the tabColors object
+  //when selecting new tabs
   var tabs = $(".tab")
   tabs.click(function(e) {
       //change the color

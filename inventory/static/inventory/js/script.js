@@ -1,6 +1,8 @@
 $(document).ready(function() {
+    rows = $('section').slice(2) //excludes the title and form rows
+
     //change background color when a user hovers over a row
-    $('section').slice(2).hover(
+    $(rows).hover(
         function() {
             const children = this.children;
             for (let i =0; i<children.length; i++) {
@@ -20,24 +22,11 @@ $(document).ready(function() {
     //skipping the form row, and update what is shown in the table based on matches
     //case insensitive
     $('#search').keyup(function(e) {
-        var filter = e.target.value.toLowerCase();
-        var rows = $('tbody').find('tr:not(:first)');
-
-        for (var i = 1; i < rows.length; i++) {
-            var row = rows[i]
-            var cells = row.getElementsByTagName('td');
-            var showRow = false;
-
-            for (var j = 0; j < cells.length; j++) {
-                var cell = cells[j];
-          
-                if (cell.innerHTML.toLowerCase().indexOf(filter) > -1) {
-                  showRow = true;
-                  break;
-                }
-              }
-          
-              row.style.display = showRow ? "" : "none";
+        var search = e.target.value.toLowerCase();
+        for (let i = 0; i < $(rows).length; i++) {
+            text = $(rows[i]).text().toLowerCase()
+            let showRow = text.indexOf(search) !== -1 ? "" : "none";
+            $(rows[i]).css('display', showRow);
         }
     })
 
