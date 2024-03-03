@@ -15,6 +15,7 @@ class onRequestForm(forms.ModelForm):
 
 class inventoryAddForm(forms.ModelForm):
     item_char = forms.CharField(max_length=100, required=False)
+    formInventory = forms.CharField(widget=forms.HiddenInput(), initial='inventory')
 
     class Meta:
         model = inventory

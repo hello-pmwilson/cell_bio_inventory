@@ -15,7 +15,7 @@
         <h3 class="notes-column">Notes <i class="bi bi-caret-down-fill filter" id="-description"></i></h3>  
     </section>
 
-    <form method="post" class="form"> {% csrf_token %}
+    <form method="post" class="form"> {% csrf_token %} {{ form.formInventory }}
     <section>
         <div class="pid-column"></div>
         <div class="item-column">{{ form.item_char }} 

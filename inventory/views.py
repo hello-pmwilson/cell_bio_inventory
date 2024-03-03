@@ -4,18 +4,53 @@ from .models import inventory, on_request, item, unit, location, category
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 
+#the context used for loading the page, making db queries, etc is referenced via a dictionary
+context = {
+    'inventory': {
+        'form': inventoryAddForm(),
+        'ordering': 'id',
+        'db': inventory,
+        'q': inventory.objects.all(),
+        'defaultURL': 'inventory/inventory.html'
+    }
+}
+
+
 #main view when calling url/inventory
 #loads different defaults based on selected link
 #update the defaults with the selected section including the forms, the databases, the order_by, and the query
 @login_required
 @csrf_protect
 def index(request):
+    # print(context['inventory']['db'])
     print("index")
+    #if form submitted, check validity and save
+    if request.method == "POST":
+        print(request.POST['formInventory'])
+
+        if 'formInventory' in request.POST:
+            print('hidden widget')
+    if request.method == "POST":
+        if 'item_char' in request.POST:
+            request.POST = request.POST.copy()
+            check_item = request.POST['item_char']
+            request.POST.pop('item_char', None)
+            query, created = item.objects.get_or_create(item=check_item, defaults={'item_description':'TBD', 'category': category.objects.get(pk=1)})
+            request.POST['item'] = item.objects.get(item=query).id
+        form = inventoryAddForm(request.POST)
+
+        if form.is_valid():
+            # form.save()
+            # return redirect(request.get_full_path())
+            print(form['formInventory'])
+        else:
+            print(form.errors)
     return render(request, 'inventory/index.html')
 
 
 def get_data(request):
     print("get data")
+    # print(context['inventory'])
     #check if specific template is called to load, and if not set default
     if 'selected' in request.GET:
         selected = request.GET['selected']
@@ -77,6 +112,9 @@ def get_data(request):
     
     #if delete is selected on a record, delete the record
     if 'delete' in request.GET:
+        print(request)
+        if 'formInventory' in request.GET:
+            print("hidden widget") 
         delete = request.GET['delete'].split(',')
         id = delete[0]
         if delete[1] == 'units':
@@ -84,16 +122,16 @@ def get_data(request):
         elif delete[1] == 'locations':
             db = location
         record = db.objects.get(pk=id)
-        record.delete()
+        # record.delete()
 
     #save finalized values and render page
-    context = {
-        'defaultURL': defaultURL,
-        'form': form,
-        'data': q,
-        'itemList': item.objects.all()
-    }
-    return render(request, defaultURL, context)
+    # context = {
+    #     'defaultURL': defaultURL,
+    #     'form': form,
+    #     'data': q,
+    #     'itemList': item.objects.all()
+    # }
+    return render(request, defaultURL, context['inventory'])
 
 def skeleton(request):
     return render(request, 'inventory/skeleton.html')
