@@ -66,7 +66,6 @@ $(document).ready(function() {
           type: 'GET',
           dataType: 'html',
           success: function(response) {
-              console.log(queryURL)
               var data = $(response);
               $("#data").html(data);
           },

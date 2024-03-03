@@ -1,11 +1,8 @@
 $(document).ready(function() {
-    console.log("Hello, World");
-
     //change background color when a user hovers over a row
     $('section').slice(2).hover(
         function() {
             const children = this.children;
-            console.log(children);
             for (let i =0; i<children.length; i++) {
                 $(children[i]).addClass('row-hover');
             }
