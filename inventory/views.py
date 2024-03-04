@@ -1,3 +1,8 @@
+##currently working on
+##adding if states to index. change url to point to the index instead and then if get data in the get request call the function to render that information
+#do this with other function as well. everything should be in the index but each thing will be a different function. 
+
+
 from django.shortcuts import render, redirect
 from .forms import onRequestForm, inventoryAddForm, itemAddForm, unitForm, locationForm
 from .models import inventory, on_request, item, unit, location, category
@@ -7,9 +12,10 @@ from django.views.decorators.csrf import csrf_protect
 #main view when calling url/inventory
 #loads different defaults based on selected link
 #update the defaults with the selected section including the forms, the databases, the order_by, and the query
+
 @login_required
 @csrf_protect
-def index(request):
+def index(request):  
     return render(request, 'inventory/index.html')
 
 def get_data(request):
