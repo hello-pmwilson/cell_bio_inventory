@@ -1,6 +1,11 @@
 ##currently working on
-##adding if states to index. change url to point to the index instead and then if get data in the get request call the function to render that information
-#do this with other function as well. everything should be in the index but each thing will be a different function. 
+#add minimum time to loading flask to force husband to appreciate it
+#break up the settings file into its respective bits and then set the code to load them seperately properly
+#add methods for adding and deleting lines
+#add code for implementing those methods
+#method is already built, add the code to do the ordrer by feature ie dropdown menu from arrow down
+#fix css so there isnt a scroll bar on the main page
+#make sure forms work, add hidden widget to all forms
 
 
 from django.shortcuts import render, redirect
@@ -58,8 +63,6 @@ data_dict = {
 @login_required
 @csrf_protect
 def index(request):  
-	if 'get_it' in request.GET:
-		return inv.render_data()
 	return render(request, 'inventory/index.html')
 
 def get_data(request):
@@ -68,32 +71,7 @@ def get_data(request):
 	else:
 		selected = 'inventory' #set the default
 	return HttpResponse(data_dict[selected].render_data(request))
-
-	# #check if specific template is called to load, and if not set default
-	# if 'selected' in request.GET:
-	# 		selected = request.GET['selected']
-	# else:
-	# 		selected = 'inventory' #set the default
-
-	# #based on selected template, load data to fill in html
-	# if selected == 'inventory':
-	# 		form = inventoryAddForm(request.POST or None)
-	# 		ordering = 'id'
-	# 		db = inventory
-	# 		q = db.objects.all().order_by(ordering)
-	# 		defaultURL = 'inventory/inventory.html'
-	# elif selected == 'requests':
-	# 		form = onRequestForm(request.POST or None)
-	# 		ordering = 'id'
-	# 		db = on_request
-	# 		q = db.objects.all().order_by(ordering)
-	# 		defaultURL = 'inventory/requests.html'
-	# elif selected == 'add_item':
-	# 		form = itemAddForm(request.POST or None)
-	# 		ordering = 'item'
-	# 		db = item
-	# 		q = db.objects.all().order_by(ordering)
-	# 		defaultURL = 'inventory/add_item.html' 
+ 
 	# elif selected == 'settings':
 	# 	form = [unitForm(request.POST or None), locationForm(request.POST or None)]
 	# 	q = [unit.objects.all(), location.objects.all()]
