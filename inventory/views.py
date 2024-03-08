@@ -6,6 +6,9 @@
 #method is already built, add the code to do the ordrer by feature ie dropdown menu from arrow down
 #fix css so there isnt a scroll bar on the main page
 #make sure forms work, add hidden widget to all forms
+#add shadow to main div
+#logout button
+
 
 
 from django.shortcuts import render, redirect
@@ -49,11 +52,15 @@ class data:
 inv = data('inventory', inventoryAddForm, inventory, 'inventory/inventory.html')
 req = data('requests', onRequestForm, on_request, 'inventory/requests.html')
 a_item = data('add item', itemAddForm, item, 'inventory/add_item.html')
+loc = data('locations', locationForm, location, 'inventory/location.html')
+un = data('units', unitForm, unit, 'inventory/unit.html')
 
 data_dict = {
 	'inventory': inv,
 	'requests': req,
-	'add_item': a_item
+	'add_item': a_item,
+	'location': loc,
+	'unit': un
 }
 
 #main view when calling url/inventory

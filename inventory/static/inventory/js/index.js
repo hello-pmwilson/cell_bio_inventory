@@ -40,7 +40,8 @@ $(document).ready(function() {
     "inventory": ["#aed9e0", "#93c8d3"], //blue
     "requests": ["#a0d9bf", "#90c8ab"], //green
     "addItem": ["#ffc0cb", "#ffb6c1"], //pink
-    "settings": ["#9c8bb1", "#817f9b"] //purple
+    "location": ["#9c8bb1", "#817f9b"], //purple
+    "unit": ["#f5d89f", "#eac86f"] //yellow
   }
 
   //when selecting new tabs

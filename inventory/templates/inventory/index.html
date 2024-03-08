@@ -20,7 +20,8 @@
         <div class="tab" href="{% url 'get_data' %}?selected=inventory" id="inventory">Inventory</div> 
         <div class="tab inactive" href="{% url 'get_data' %}?selected=requests" id="requests">Request</div>
         <div class="tab inactive" href="{% url 'get_data' %}?selected=add_item" id="addItem">Add Item</div>
-        <div class="tab inactive" href="{% url 'get_data' %}?selected=settings" id="settings">Settings</div>
+        <div class="tab inactive" href="{% url 'get_data' %}?selected=location" id="location">Locations</div>
+        <div class="tab inactive" href="{% url 'get_data' %}?selected=unit" id="unit">Units</div>
     </div>
     <div id="data" defaulturl="{% url 'get_data' %}">        
         <svg id="loading-flask" xmlns="http://www.w3.org/2000/svg" width="50" height="100" viewBox="0 0 50 20">
