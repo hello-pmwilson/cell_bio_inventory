@@ -1,13 +1,12 @@
 ##currently working on
 #add minimum time to loading flask to force husband to appreciate it
-#break up the settings file into its respective bits and then set the code to load them seperately properly
 #add methods for adding and deleting lines
 #add code for implementing those methods
 #method is already built, add the code to do the ordrer by feature ie dropdown menu from arrow down
-#fix css so there isnt a scroll bar on the main page
-#make sure forms work, add hidden widget to all forms
 #add shadow to main div
 #logout button
+#sticky title
+#fix scroll bar
 
 
 

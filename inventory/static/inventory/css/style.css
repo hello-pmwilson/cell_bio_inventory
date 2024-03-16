@@ -44,7 +44,7 @@ body {
 #data {
   background-color: var(--primary-color); 
   transition: var(--background-color-trasition);
-  height: 100%;
+  height: 90%;
   min-width: 80%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -52,7 +52,40 @@ body {
   padding: 15px;
   position: relative;
   z-index: 1;
+  box-shadow: -5px 5px 10px 0px rgba(116, 116, 141, 0.19);
+  border-radius: 10px;
 }
+
+/* Chrome, Safari Scrollbar*/
+#data::-webkit-scrollbar {
+  width: 20px;
+}
+
+#data::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 50px;
+  border: solid 5px var(--primary-color);
+}
+
+#data::-webkit-scrollbar-track {
+  opacity: 0;
+}
+
+/* Edge, Explorer Scrollbar*/
+#data::-ms-scrollbar {
+  width: 20px;
+}
+
+#data::-ms-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 50px;
+  border: solid 5px var(--primary-color);
+}
+
+#data::-ms-scrollbar-track {
+  opacity: 0;
+}
+
 
 .search-bar {
   display: flex;
@@ -61,7 +94,7 @@ body {
 }
 
 #search {
-  width: 25%;
+  width: 250px;
   border-radius: 5px;
   border-width: 1px;
 }
@@ -80,13 +113,14 @@ body {
   border-top-left-radius: 50px;
   border-bottom-left-radius: 50px;
   position: relative;
-  z-index: 0;
+  z-index: 2;
 }
 
 .inactive {
-  background: linear-gradient(to left, #74748d30 0%, #74748d00 20%);
+  /* background: linear-gradient(to left, #74748d30 0%, #74748d00 20%); */
   transition: var(--background-color-trasition);
   transform: scale(.95) translateX(5px);
+  z-index: 0;
 }
 
 #loading-flask {
