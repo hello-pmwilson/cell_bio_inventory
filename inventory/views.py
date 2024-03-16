@@ -1,5 +1,4 @@
 ##currently working on
-#add minimum time to loading flask to force husband to appreciate it
 #add methods for adding and deleting lines
 #add code for implementing those methods
 

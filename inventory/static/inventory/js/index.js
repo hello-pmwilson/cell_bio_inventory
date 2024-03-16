@@ -1,21 +1,5 @@
 $(document).ready(function() {
-  //Load Data
-  //When the page is called, make the API call for the initial data to load in
-  var defaultURL = $('#data').attr("defaultURL")
-  $.ajax({
-    url: defaultURL,
-    type: 'GET',
-    dataType: 'html',
-    success: function(response) {
-        var data = $(response);
-        $("#data").html(data);
-    },
-    error: function(error) {
-        console.error('Error fetching new content:', error);
-    }
-  });
-
-  //Loading Animation - Loading Flask
+//Loading Animation - Loading Flask
   //thanks yqnn.github.io/svg-path-editor/ for the editor which was used to make the svg
   var loadingFlaskPath = $("#loading-flask-path")
   const paths = [
@@ -31,10 +15,31 @@ $(document).ready(function() {
 
   loopLoadingFlask();
   var loopLoadingFlask = setInterval(loopLoadingFlask,500);
-  setTimeout(function() {
-      clearInterval(loopLoadingFlask); // This will stop the interval after 5 seconds
-    }, 5000);
 
+
+  //Load Data
+  //When the page is called, make the API call for the initial data to load in
+  var defaultURL = $('#data').attr("defaultURL")
+  $.ajax({
+    url: defaultURL,
+    type: 'GET',
+    dataType: 'html',
+    success: function(response) {
+      var data = $(response);
+      //wait a few seconds before loading the data to force my husband to appreciate my hard work
+      //for real use do not force people to wait
+      setTimeout(function() {
+      clearInterval(loopLoadingFlask);
+      $("#data").html(data);
+      }, 3000);
+
+    },
+    error: function(error) {
+      console.error('Error fetching new content:', error);
+    }
+  });
+
+  
 //Tabs
   const tabColors = {
     "inventory": ["#aed9e0", "#93c8d3"], //blue
