@@ -1,15 +1,41 @@
 {% load static %}
 <script src="{% static 'inventory/js/script.js' %}"></script>
+<script>window.selected='requests'</script>
 <link rel="stylesheet" href="{% static 'inventory/css/request_data.css' %}">
 <h1 class="title">Requests</h1>
 <div class="search-bar"><input type="text" id="search" placeholder="Search"></div>
 <div id="data-data">
     <section id="column-header">
-        <h3 class="pid-column">ID <i class="bi bi-caret-down-fill filter" id="-id"></i></h3>
-        <h3 class="item-column">Item <i class="bi bi-caret-down-fill filter" id="-item"></i></h3>
-        <h3 class="amount-column">Amount <i class="bi bi-caret-down-fill filter" id="-amount"></i></h3>
-        <h3 class="unit-column">Unit<i class="bi bi-caret-down-fill filter" id="-unit"></i></h3>
-        <h3 class="status-column">Status <i class="bi bi-caret-down-fill filter" id="-status"></i></h3>  
+        <h3 class="pid-column">ID <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-numeric-up" order-by="id"></i>
+                <i class="bi bi-sort-numeric-down-alt" order-by="-id"></i>
+            </div>
+        </h3>
+        <h3 class="item-column">Item <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-alpha-up" order-by="item"></i>
+                <i class="bi bi-sort-alpha-down-alt"order-by="-item"></i>
+            </div>
+        </h3>
+        <h3 class="amount-column">Amount <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-numeric-up" order-by="amount"></i>
+                <i class="bi bi-sort-numeric-down-alt" order-by="-amount"></i>
+            </div>
+        </h3>
+        <h3 class="unit-column">Unit<i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-alpha-up" order-by="unit"></i>
+                <i class="bi bi-sort-alpha-down-alt"order-by="-unit"></i>
+            </div>
+        </h3>
+        <h3 class="status-column">Status <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-alpha-up" order-by="status"></i>
+                <i class="bi bi-sort-alpha-down-alt"order-by="-status"></i>
+            </div>
+        </h3>  
     </section>
 
     <form method="post" class="form"> {% csrf_token %}

@@ -2,18 +2,11 @@
 #add minimum time to loading flask to force husband to appreciate it
 #add methods for adding and deleting lines
 #add code for implementing those methods
-#method is already built, add the code to do the ordrer by feature ie dropdown menu from arrow down
-#add shadow to main div
-#logout button
-#sticky title
-#fix scroll bar
 
-
-
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.template.loader import render_to_string
 from .forms import onRequestForm, inventoryAddForm, itemAddForm, unitForm, locationForm
-from .models import inventory, on_request, item, unit, location, category
+from .models import inventory, on_request, item, unit, location
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.http import HttpResponse
@@ -29,20 +22,20 @@ class data:
 	def __str__(self):
 		return f"{self.title}"
 
-	def query(self, **kwargs):
+	def query(self, *args):
 		#call for the data to fill the template
 		#include any number of order by parameters
 		q = self.db.objects.all()
-		if kwargs:
-			q = q.order_by(*kwargs.values())
+		if args:
+			q = q.order_by(*args)
 		return q
 
-	def render_data(self, request):
+	def render_data(self, request, order_by='id'):
 		csrf_token = get_token(request)
 		context = {
 			'defaultURL': self.url,
 			'form': self.form,
-			'data': self.query(),
+			'data': self.query(order_by),
 			'itemList': item.objects.all(),
 			'csrf_token': csrf_token
 		}
@@ -76,7 +69,11 @@ def get_data(request):
 		selected = request.GET['selected']
 	else:
 		selected = 'inventory' #set the default
+	if 'order_by' in request.GET:
+		order_by = request.GET['order_by']
+		return HttpResponse(data_dict[selected].render_data(request, order_by=order_by))
 	return HttpResponse(data_dict[selected].render_data(request))
+
  
 	# elif selected == 'settings':
 	# 	form = [unitForm(request.POST or None), locationForm(request.POST or None)]

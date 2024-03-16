@@ -1,14 +1,35 @@
 {% load static %}
 <script src="{% static 'inventory/js/script.js' %}"></script>
+<script>window.selected='add_item'</script>
 <link rel="stylesheet" href="{% static 'inventory/css/add_item_data.css' %}">
 <h1 class="title">Items</h1>
 <div class="search-bar"><input type="text" id="search" placeholder="Search"></div>
 <div id="data-data">
     <section class="column-header">
-        <h3 class="pid-column">ID <i class="bi bi-caret-down-fill filter" id="-id"></i></h3>
-        <h3 class="item-column">Item <i class="bi bi-caret-down-fill filter" id="-item"></i></h3>  
-        <h3 class="description">Description <i class="bi bi-caret-down-fill filter" id="-description"></i></h3>
-        <h3 class="category-column">Category <i class="bi bi-caret-down-fill filter" id="-category"></i></h3>  
+        <h3 class="pid-column">ID <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-numeric-up" order-by="id"></i>
+                <i class="bi bi-sort-numeric-down-alt" order-by="-id"></i>
+            </div>
+        </h3>
+        <h3 class="item-column">Item <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-alpha-up" order-by="item"></i>
+                <i class="bi bi-sort-alpha-down-alt"order-by="-item"></i>
+            </div>
+        </h3>  
+        <h3 class="description">Description <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-alpha-up" order-by="item_description"></i>
+                <i class="bi bi-sort-alpha-down-alt"order-by="-item_description"></i>
+            </div>
+        </h3>
+        <h3 class="category-column">Category <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-alpha-up" order-by="category"></i>
+                <i class="bi bi-sort-alpha-down-alt"order-by="-category"></i>
+            </div>
+        </h3>  
     </section>
 
     <form method="post" class="form"> {% csrf_token %}

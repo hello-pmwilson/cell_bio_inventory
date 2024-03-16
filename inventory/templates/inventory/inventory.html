@@ -1,16 +1,47 @@
 {% load static %}
 <script src="{% static 'inventory/js/script.js' %}"></script>
+<script>window.selected='inventory'</script>
 <link rel="stylesheet" href="{% static 'inventory/css/inventory_data.css' %}">
 <h1 class="title">Inventory</h1>
 <div class="search-bar"><input type="text" id="search" placeholder="Search"></div>
 <div id="data-data">
     <section class="column-header">
-        <h3 class="pid-column">ID <i class="bi bi-caret-down-fill filter" id="-id"></i></h3>
-        <h3 class="item-column">Item <i class="bi bi-caret-down-fill filter" id="-item"></i></h3>
-        <h3 class="amount-column">Amount <i class="bi bi-caret-down-fill filter" id="-amount"></i></h3>
-        <h3 class="unit-column">Unit<i class="bi bi-caret-down-fill filter" id="-unit"></i></h3>
-        <h3 class="location-column">Location <i class="bi bi-caret-down-fill filter" id="-location"></i></h3>  
-        <h3 class="notes-column">Notes <i class="bi bi-caret-down-fill filter" id="-description"></i></h3>  
+        <h3 class="pid-column">ID <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-numeric-up" order-by="id"></i>
+                <i class="bi bi-sort-numeric-down-alt" order-by="-id"></i>
+            </div>
+        </h3>
+        <h3 class="item-column">Item <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-alpha-up" order-by="item"></i>
+                <i class="bi bi-sort-alpha-down-alt"order-by="-item"></i>
+            </div>
+        </h3>
+        <h3 class="amount-column">Amount <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-numeric-up" order-by="amount"></i>
+                <i class="bi bi-sort-numeric-down-alt" order-by="-amount"></i>
+            </div>
+        </h3>
+        <h3 class="unit-column">Unit<i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-alpha-up" order-by="unit"></i>
+                <i class="bi bi-sort-alpha-down-alt" order-by="-unit"></i>
+            </div>
+        </h3>
+        <h3 class="location-column">Location <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-alpha-up" order-by="location"></i>
+                <i class="bi bi-sort-alpha-down-alt" order-by="-location"></i>
+            </div>
+        </h3>  
+        <h3 class="notes-column">Notes <i class="bi bi-caret-down-fill filter"></i>
+            <div class="drop-down">
+                <i class="bi bi-sort-alpha-up" order-by="notes"></i>
+                <i class="bi bi-sort-alpha-down-alt" order-by="-notes"></i>
+            </div>
+        </h3>  
     </section>
 
     <form method="post" class="form"> {% csrf_token %} {{ form.formInventory }}

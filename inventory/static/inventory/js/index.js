@@ -58,14 +58,16 @@ $(document).ready(function() {
     $('html').css('--primary-color', primaryColor);
     $('html').css('--secondary-color', secondaryColor);
     //get the information to load
-    let queryURL = this.getAttribute('href')
-
+    let queryURL = $(this).attr('href')
+    window.selected = $(this).attr('id');
     //send get request and extract only the html we want to update
     $.ajax({
         url: queryURL,
         type: 'GET',
         dataType: 'html',
         success: function(response) {
+          
+          console.log(window.selected);
             var data = $(response);
             $("#data").html(data);
             setTimeout(function() {$('#data').css('overflow-y', 'auto');}, 1000); //wait for transitions then reveal the scrollbar

@@ -170,3 +170,20 @@ body {
   background-color: #74748d30;
 }
 
+.drop-down {
+  background-color: var(--secondary-color);
+  display: none;
+  position: fixed;
+  border-radius: 10px;
+  padding: 12px 16px;
+  height: 40px;
+  width: 25px;
+}
+
+.drop-down i {
+  display: block;
+}
+
+.drop-down i:hover {
+  background-color: #74748d30;
+}

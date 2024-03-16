@@ -30,39 +30,94 @@ $(document).ready(function() {
     }
   })
 
-  //when a caret is clicked, send a get request with the information
-  //and update the table with the new order W/O refreshing the whole page
-  //and toggle the orderID between ascending and descending
+  //When a caret is clicked, a drop down menu appears
+  //The drop down will hide if the mouse leaves the button without entering the drop down or once leaving the drop down
+  //clicking on an option in the dropdown will send a request to reorder the data based on the selected option
   $(".bi-caret-down-fill").click(function(e) {
-      let orderID = e.target.id
+    var button = e.target;
+    var buttonRect = button.getBoundingClientRect();
+    var dropDown = e.target.nextElementSibling; //Works because the dropdown is the next sibling, fix in future if adding anything
+    dropDown.style.left = buttonRect.right + 'px';
+    dropDown.style.top = buttonRect.bottom + 'px';
+    $(dropDown).toggle();
 
-      //grab url for get request and edit url to be sent accordingly
-      let url = window.location.href;
-      if (url.includes('?')) { //if another parameter is already set
-        var queryURL = window.location.href + `&order_by=${orderID}`;
-      } else {
-        var queryURL = window.location.href + `?order_by=${orderID}`;
-      }
-
-      //send get request and extract only the html we want to update
-      $.ajax({
-        url: queryURL,
-        type: 'GET',
-        dataType: 'html',
-        success: function(response) {
-          var db = $(response).find('tbody').html();
-          $('tbody').html(db); //update the content with the reordered db
-          onTableLoad();
-        },
-        error: function(error) {
-          console.error('Error fetching new content:', error);
+    var dropHover = false;
+    $(button).mouseleave(function() {
+      setTimeout(function() {
+        if (!dropHover) {
+          $(dropDown).hide();
         }
-      });
+      }, 100); //give a milisecond to get to the drop down
+    });
+    $(dropDown).mouseenter(function() {
+      dropHover = true;
+    })
+    $(dropDown).mouseleave(function() {
+      $(dropDown).hide();
+    })
+  });
 
-      toggleOrder(orderID); 
-  })
+  $('.drop-down').find('i').click(function(e) {
+    let orderBy = $(e.target).attr("order-by");
+    var query = `/inventory/get_data?selected=${window.selected}&order_by=${orderBy}`;
 
-  onTableLoad(); //set event listeners for items in the table
+    //send the query
+    $.ajax({
+    url: query,
+    type: 'GET',
+    dataType: 'html',
+    success: function(response) {
+        var data = $(response);
+        $("#data").html(data);
+    },
+    error: function(error) {
+        console.error('Error fetching new content:', error);
+    }
+    });
+  });
+
+    // 
+    // //set query
+
+  // var query = 
+  
+    
+  // });
+
+  // //when a caret is clicked, send a get request with the information
+  // //and update the table with the new order W/O refreshing the whole page
+  // //and toggle the orderID between ascending and descending
+  // $(".bi-caret-down-fill").click(function(e) {
+  //   console.log("clicky");
+  //     let orderID = e.target.id
+
+  //     //grab url for get request and edit url to be sent accordingly
+  //     let url = window.location.href;
+  //     if (url.includes('?')) { //if another parameter is already set
+  //       var queryURL = window.location.href + `&order_by=${orderID}`;
+  //     } else {
+  //       var queryURL = window.location.href + `?order_by=${orderID}`;
+  //     }
+
+  //     //send get request and extract only the html we want to update
+  //     $.ajax({
+  //       url: queryURL,
+  //       type: 'GET',
+  //       dataType: 'html',
+  //       success: function(response) {
+  //         var db = $(response).find('tbody').html();
+  //         $('tbody').html(db); //update the content with the reordered db
+  //         onTableLoad();
+  //       },
+  //       error: function(error) {
+  //         console.error('Error fetching new content:', error);
+  //       }
+  //     });
+
+  //     toggleOrder(orderID); 
+  // })
+
+  // onTableLoad(); //set event listeners for items in the table
 
 })
 
