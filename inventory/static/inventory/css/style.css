@@ -162,8 +162,8 @@ body {
 }
 
 
-.delete {
-  visibility: hidden;
+.edit {
+  display: none;
 }
 
 .row-hover {

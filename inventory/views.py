@@ -39,6 +39,12 @@ class data:
 			'csrf_token': csrf_token
 		}
 		return render_to_string(self.url, context)
+
+	def delete(self, delete_id):
+		record = self.db.objects.get(pk=delete_id)
+		print('would delete' , record)
+		# record.delete()
+
     
 inv = data('inventory', inventoryAddForm, inventory, 'inventory/inventory.html')
 req = data('requests', onRequestForm, on_request, 'inventory/requests.html')
@@ -73,7 +79,15 @@ def get_data(request):
 		return HttpResponse(data_dict[selected].render_data(request, order_by=order_by))
 	return HttpResponse(data_dict[selected].render_data(request))
 
- 
+def delete(request):
+	print(request)
+	delete_id = request.GET['delete']
+	selected = request.GET['selected']
+	print(delete_id)
+	print(selected)
+	data_dict[selected].delete(delete_id)
+	return HttpResponse(status=204)
+
 	# elif selected == 'settings':
 	# 	form = [unitForm(request.POST or None), locationForm(request.POST or None)]
 	# 	q = [unit.objects.all(), location.objects.all()]
