@@ -16,8 +16,15 @@ $(document).ready(function() {
         console.log(id);
         if (id == 1 && (window.selected == 'unit' || window.selected == 'location')) {
         alert('Sorry, This value is set as the default. You cannot delete it.');
-        return
+        return;
       };
+        if (window.selected == 'add_item') {
+          var userConfirm = confirm('Wait! Deleting an item from this database will delete all records with this item across all databases.\nDo you still want to delete?');
+          if (!userConfirm) {
+              return; //if user hits cancel, exit the function and do not delete
+          }
+        }
+
         var query = `/inventory/delete?selected=${window.selected}&delete=${id}`;
         $.ajax({
           url: query,
@@ -103,8 +110,6 @@ $(document).ready(function() {
     });
   });
 
-  // onTableLoad(); //set event listeners for items in the table
-
 })
 
 //when the table is loaded or reloaded after page refresh/ajax/etc
@@ -136,13 +141,6 @@ function setRowHover() {
 
 //           url = getQueryURL() + `delete=${id},${formID}`;
   
-//           if (url.includes('add_item')) {
-//               var userConfirm = confirm('Wait! Deleting an item from this database will delete all records with this item across all databases.\nDo you still want to delete?');
-//               if (!userConfirm) {
-//                   return; //if user hits cancel, exit the function and do not delete
-//               }
-//           }
-
 //           if (url.includes('=1,units') || url.includes('=1,location')) {
 //               alert('Sorry, This value is set as the default. You cannot delete it.');
 //               return
