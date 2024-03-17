@@ -1,59 +1,61 @@
 {% load static %}
 <script src="{% static 'inventory/js/script.js' %}"></script>
-<script>window.selected='add_item'</script>
+<script>window.selected = 'add_item'</script>
 <link rel="stylesheet" href="{% static 'inventory/css/add_item_data.css' %}">
 <h1 class="title">Items</h1>
 <div class="search-bar"><input type="text" id="search" placeholder="Search"></div>
 <div id="data-data">
-    <section class="column-header">
-        <h3 class="pid-column">ID <i class="bi bi-caret-down-fill filter"></i>
-            <div class="drop-down">
-                <i class="bi bi-sort-numeric-up" order-by="id"></i>
-                <i class="bi bi-sort-numeric-down-alt" order-by="-id"></i>
-            </div>
-        </h3>
-        <h3 class="item-column">Item <i class="bi bi-caret-down-fill filter"></i>
-            <div class="drop-down">
-                <i class="bi bi-sort-alpha-up" order-by="item"></i>
-                <i class="bi bi-sort-alpha-down-alt"order-by="-item"></i>
-            </div>
-        </h3>  
-        <h3 class="description">Description <i class="bi bi-caret-down-fill filter"></i>
-            <div class="drop-down">
-                <i class="bi bi-sort-alpha-up" order-by="item_description"></i>
-                <i class="bi bi-sort-alpha-down-alt"order-by="-item_description"></i>
-            </div>
-        </h3>
-        <h3 class="category-column">Category <i class="bi bi-caret-down-fill filter"></i>
-            <div class="drop-down">
-                <i class="bi bi-sort-alpha-up" order-by="category"></i>
-                <i class="bi bi-sort-alpha-down-alt"order-by="-category"></i>
-            </div>
-        </h3>  
-    </section>
+  <section class="column-header">
+    <h3 class="pid-column">ID <i class="bi bi-caret-down-fill filter"></i>
+      <div class="drop-down">
+        <i class="bi bi-sort-numeric-up" order-by="id"></i>
+        <i class="bi bi-sort-numeric-down-alt" order-by="-id"></i>
+      </div>
+    </h3>
+    <h3 class="item-column">Item <i class="bi bi-caret-down-fill filter"></i>
+      <div class="drop-down">
+        <i class="bi bi-sort-alpha-up" order-by="item"></i>
+        <i class="bi bi-sort-alpha-down-alt" order-by="-item"></i>
+      </div>
+    </h3>
+    <h3 class="description">Description <i class="bi bi-caret-down-fill filter"></i>
+      <div class="drop-down">
+        <i class="bi bi-sort-alpha-up" order-by="item_description"></i>
+        <i class="bi bi-sort-alpha-down-alt" order-by="-item_description"></i>
+      </div>
+    </h3>
+    <h3 class="category-column">Category <i class="bi bi-caret-down-fill filter"></i>
+      <div class="drop-down">
+        <i class="bi bi-sort-alpha-up" order-by="category"></i>
+        <i class="bi bi-sort-alpha-down-alt" order-by="-category"></i>
+      </div>
+    </h3>
+  </section>
 
-    <form method="post" class="form"> {% csrf_token %}
+  <form method="post" class="form"> {% csrf_token %}
     <section>
-        <div class="pid-column"></div>
-        <div class="item-column">{{ form.item_char }} 
-            <datalist id="itemOptions">
-                {% for item in itemList %}
-                <option value="{{ item }}" ></option>
-                {% endfor %}
-            </datalist>
-        </div>
-        <div class="description-column">{{ form.item_description }}</div>
-        <div class="category-column">{{ form.category }}</div>
-        <div class="edit-column"><input type="submit" value="Submit"></div>  
+      <div class="pid-column"></div>
+      <div class="item-column">{{ form.item_char }}
+        <datalist id="itemOptions">
+          {% for item in itemList %}
+          <option value="{{ item }}"></option>
+          {% endfor %}
+        </datalist>
+      </div>
+      <div class="description-column">{{ form.item_description }}</div>
+      <div class="category-column">{{ form.category }}</div>
+      <div class="edit-column"><input type="submit" value="Submit"></div>
     </section>
-    </form>
-{% for item in data %}
-    <section id="{{item.id}}">
-        <div class="pid-column">{{ item.id }}</div>
-        <div class="item-column">{{ item.item }}</div>
-        <div class="description-column">{{ item.item_description }}</div>
-        <div class="category-column">{{ item.category }}</div>
-        <div class="edit-column"><div class="edit"><i class="bi bi-trash3 delete"></i></div></div>         
-    </section>
-{% endfor %}
+  </form>
+  {% for item in data %}
+  <section id="{{item.id}}">
+    <div class="pid-column">{{ item.id }}</div>
+    <div class="item-column">{{ item.item }}</div>
+    <div class="description-column">{{ item.item_description }}</div>
+    <div class="category-column">{{ item.category }}</div>
+    <div class="edit-column">
+      <div class="edit"><i class="bi bi-trash3 delete"></i></div>
+    </div>
+  </section>
+  {% endfor %}
 </div>

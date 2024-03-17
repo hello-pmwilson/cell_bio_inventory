@@ -80,23 +80,11 @@ def get_data(request):
 	return HttpResponse(data_dict[selected].render_data(request))
 
 def delete(request):
-	print(request)
 	delete_id = request.GET['delete']
 	selected = request.GET['selected']
-	print(delete_id)
-	print(selected)
 	data_dict[selected].delete(delete_id)
 	return HttpResponse(status=204)
 
-	# elif selected == 'settings':
-	# 	form = [unitForm(request.POST or None), locationForm(request.POST or None)]
-	# 	q = [unit.objects.all(), location.objects.all()]
-	# 	defaultURL = 'inventory/settings.html'  
-	
-	# #check if order_by is set and update the query accordingly
-	# if 'order_by' in request.GET:
-	# 	ordering = request.GET['order_by']
-	# 	q = db.objects.all().order_by(ordering)
 	
 	# #if form submitted, check validity and save
 	# if request.method == "POST":
@@ -122,28 +110,5 @@ def delete(request):
 	# 	else:
 	# 		print(form.errors)
 	
-	# #if delete is selected on a record, delete the record
-	# if 'delete' in request.GET:
-	# 	if 'formInventory' in request.GET:
-	# 		print("hidden widget") 
-	# 	delete = request.GET['delete'].split(',')
-	# 	id = delete[0]
-	# 	if delete[1] == 'units':
-	# 		db = unit
-	# 	elif delete[1] == 'locations':
-	# 		db = location
-	# 	record = db.objects.get(pk=id)
-	# 	record.delete()
-
-	# #save finalized values and render page
-	# context = {
-	# 	'rendered_data': inv.render_data(),
-	# 	# 'defaultURL': defaultURL,
-	# 	# 'form': form,
-	# 	# 'data': q,
-	# 	# 'itemList': item.objects.all()
-	# }
-	# return HttpResponse(inv.render_data(request)) #render(request, defaultURL, context)
-
 def skeleton(request):
   return render(request, 'inventory/skeleton.html')
