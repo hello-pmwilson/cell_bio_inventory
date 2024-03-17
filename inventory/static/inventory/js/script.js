@@ -14,6 +14,10 @@ $(document).ready(function() {
       var deleteButton = $(editOptions).find('.delete');
       $(deleteButton).click(function() {
         console.log(id);
+        if (id == 1 && (window.selected == 'unit' || window.selected == 'location')) {
+        alert('Sorry, This value is set as the default. You cannot delete it.');
+        return
+      };
         var query = `/inventory/delete?selected=${window.selected}&delete=${id}`;
         $.ajax({
           url: query,
