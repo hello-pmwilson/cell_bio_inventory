@@ -2,6 +2,8 @@
   --primary-color: #aed9e0;
   --secondary-color: #93c8d3;
   --background-color-trasition: background-color 1s ease;
+  --shadow: #74748d30;
+  --fail: rgba(247, 72, 86, 0.832);
 }
 
 body {
@@ -167,7 +169,7 @@ body {
 }
 
 .row-hover {
-  background-color: #74748d30;
+  background-color: var(--shadow);
 }
 
 .drop-down {
@@ -185,5 +187,5 @@ body {
 }
 
 .drop-down i:hover {
-  background-color: #74748d30;
+  background-color: var(--shadow);
 }

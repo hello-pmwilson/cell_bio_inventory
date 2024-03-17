@@ -31,7 +31,7 @@ $(document).ready(function () {
       setTimeout(function () {
         clearInterval(loopLoadingFlask);
         $("#data").html(data);
-      }, 3000);
+      }, 0);
 
     },
     error: function (error) {

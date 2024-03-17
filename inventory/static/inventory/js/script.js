@@ -4,8 +4,9 @@ $(document).ready(function () {
 	//change background color when a user hovers over a row
 	$(rows).hover(
 		function () {
-			var id = $(this).attr('id');
-			var children = this.children;
+			var row = this
+			var id = $(row).attr('id');
+			var children = row.children;
 			for (let i = 0; i < children.length; i++) {
 				$(children[i]).addClass('row-hover');
 			}
@@ -24,6 +25,11 @@ $(document).ready(function () {
 					}
 				}
 
+				//the deleted row will dissapear
+				for (let i = 0; i < children.length; i++) {
+					$(children[i]).toggle();
+				}
+
 				var query = `/inventory/delete?selected=${window.selected}&delete=${id}`;
 				$.ajax({
 					url: query,
@@ -31,10 +37,21 @@ $(document).ready(function () {
 					dataType: 'html',
 					success: function () {
 						console.log('success');
-						//add logic to remove lines when deleted, then fix if delete was unsuccessful 
+						//if successful the row stays hidden 
 					},
 					error: function (error) {
+						//if the deletion query fails the row will reappear and be red 
 						console.error('Error fetching new content:', error);
+						for (let i = 0; i < children.length; i++) {
+							$(children[i]).toggle();
+							$(children[i]).css('background-color', 'var(--fail')
+						};
+						//for half a second before returning to normal
+						setTimeout(function(){
+							for (let i = 0; i < children.length; i++) {
+								$(children[i]).css('background-color', '');
+							};							
+						}, 500)					
 					}
 				});
 			})

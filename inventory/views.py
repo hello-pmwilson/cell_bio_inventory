@@ -8,8 +8,10 @@ from .forms import onRequestForm, inventoryAddForm, itemAddForm, unitForm, locat
 from .models import inventory, on_request, item, unit, location
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseServerError
 from django.middleware.csrf import get_token
+
+from time import sleep
 
 class data:
 	def __init__(self, title, form, db, url):
@@ -44,6 +46,8 @@ class data:
 		record = self.db.objects.get(pk=delete_id)
 		print('would delete' , record)
 		# record.delete()
+	
+	# def add(self, ):
 
     
 inv = data('inventory', inventoryAddForm, inventory, 'inventory/inventory.html')
@@ -84,19 +88,15 @@ def delete(request):
 	selected = request.GET['selected']
 	data_dict[selected].delete(delete_id)
 	return HttpResponse(status=204)
+	# return HttpResponseServerError('Simulation')
 
-	
-	# #if form submitted, check validity and save
-	# if request.method == "POST":
-	# 	if type(form) is list:
-	# 		for possiblySubmittedForm in form:
-	# 			if possiblySubmittedForm.is_valid():
-	# 				possiblySubmittedForm.save()
-	# 				return redirect(request.get_full_path())
-	# 	if 'item_char' in request.POST:
-	# 		request.POST = request.POST.copy()
-	# 		check_item = request.POST['item_char']
-	# 		request.POST.pop('item_char', None)
+# def add(request):
+# 	#if form submitted, check validity and save
+# 	if request.method == "POST":
+# 		if 'item_char' in request.POST:
+# 			request.POST = request.POST.copy()
+# 			check_item = request.POST['item_char']
+# 			request.POST.pop('item_char', None)
 	# 		query, created = item.objects.get_or_create(item=check_item, defaults={'item_description':'TBD', 'category': category.objects.get(pk=1)})
 	# 		request.POST['item'] = item.objects.get(item=query).id
 	# 	if selected == 'inventory':
