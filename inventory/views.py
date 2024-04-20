@@ -2,13 +2,13 @@
 #add methods for adding and deleting lines
 #add code for implementing those methods
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from .forms import onRequestForm, inventoryAddForm, itemAddForm, unitForm, locationForm
-from .models import inventory, on_request, item, unit, location
+from .models import inventory, on_request, item, unit, location, category
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from django.http import HttpResponse, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseServerError, JsonResponse
 from django.middleware.csrf import get_token
 
 from time import sleep
@@ -44,10 +44,14 @@ class data:
 
 	def delete(self, delete_id):
 		record = self.db.objects.get(pk=delete_id)
-		print('would delete' , record)
-		# record.delete()
+		record.delete()
 	
-	# def add(self, ):
+	def add(self, request):
+		if self.form(request).is_valid():
+			self.form(request).save() 
+		else:
+			print(self.form(request).errors)
+		
 
     
 inv = data('inventory', inventoryAddForm, inventory, 'inventory/inventory.html')
@@ -70,7 +74,7 @@ data_dict = {
 
 @login_required
 @csrf_protect
-def index(request):  
+def index(request): 
 	return render(request, 'inventory/index.html')
 
 def get_data(request):
@@ -90,25 +94,26 @@ def delete(request):
 	return HttpResponse(status=204)
 	# return HttpResponseServerError('Simulation')
 
-# def add(request):
-# 	#if form submitted, check validity and save
-# 	if request.method == "POST":
-# 		if 'item_char' in request.POST:
-# 			request.POST = request.POST.copy()
-# 			check_item = request.POST['item_char']
-# 			request.POST.pop('item_char', None)
-	# 		query, created = item.objects.get_or_create(item=check_item, defaults={'item_description':'TBD', 'category': category.objects.get(pk=1)})
-	# 		request.POST['item'] = item.objects.get(item=query).id
-	# 	if selected == 'inventory':
-	# 		form = inventoryAddForm(request.POST)
-	# 	elif selected == 'requests':
-	# 		form = onRequestForm(request.POST)
-					
-	# 	if form.is_valid():
-	# 		form.save()
-	# 		return redirect(request.get_full_path())
-	# 	else:
-	# 		print(form.errors)
-	
+def add(request):
+	#check the selected item. If blank use a default. If the form is the add_item form, add the item. 
+	#if not check if the selected item exists and create it if it doesnt.
+	if request.method == "POST":
+		request.POST = request.POST.copy()
+		selected = request.POST['form_is']
+		if 'item_char' in request.POST:
+			selected_item = request.POST.pop('item_char', None)[0].strip()
+			if selected_item == '':
+				selected_item = item.objects.get(item='Lab Stuff')
+			else:
+				if selected == 'add_item': 
+					request.POST['item'] = selected_item
+					a_item.add(request.POST)
+				else:	
+					item_query, created = item.objects.get_or_create(item=selected_item, defaults={'item_description':'TBD', 'category': category.objects.get(pk=1)})
+					request.POST['item'] = item.objects.get(item=item_query).id
+		data_dict[selected].add(request.POST)
+
+	return JsonResponse({'status': 'success', 'message': 'Form submitted successfully'})
+
 def skeleton(request):
   return render(request, 'inventory/skeleton.html')

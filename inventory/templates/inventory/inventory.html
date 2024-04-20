@@ -44,7 +44,7 @@
     </h3>
   </section>
 
-  <form method="post" class="form"> {% csrf_token %} {{ form.formInventory }}
+  <form method="post" action="/inventory/add" class="form"> {% csrf_token %} {{ form.form_is }}
     <section>
       <div class="pid-column "></div>
       <div class="item-column">{{ form.item_char }}
@@ -58,7 +58,7 @@
       <div class="unit-cloumn">{{ form.unit }}</div>
       <div class="location-column">{{ form.location }}</div>
       <div class="notes-column">{{ form.notes }}</div>
-      <div class="edit-column"><input type="submit" value="Submit"></div>
+      <div class="edit-column"><input id="submit" type="submit" value="Submit"></div>
     </section>
   </form>
   {% for item in data %}

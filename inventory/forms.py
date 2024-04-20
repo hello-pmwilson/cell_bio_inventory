@@ -4,6 +4,7 @@ from .models import on_request, inventory, item, unit, location
 
 class onRequestForm(forms.ModelForm):
     item_char = forms.CharField(max_length=100, required=False)
+    form_is = forms.CharField(widget=forms.HiddenInput(), initial='requests')
 
     class Meta:
         model = on_request
@@ -13,9 +14,10 @@ class onRequestForm(forms.ModelForm):
         super(onRequestForm, self).__init__(*args, **kwargs)
         self.fields['item_char'].widget = TextInput(attrs={'id': 'item_char_field', 'list': 'itemOptions'})
 
+
 class inventoryAddForm(forms.ModelForm):
     item_char = forms.CharField(max_length=100, required=False)
-    formInventory = forms.CharField(widget=forms.HiddenInput(), initial='inventory')
+    form_is = forms.CharField(widget=forms.HiddenInput(), initial='inventory')
 
     class Meta:
         model = inventory
@@ -27,6 +29,7 @@ class inventoryAddForm(forms.ModelForm):
 
 class itemAddForm(forms.ModelForm):
     item_char = forms.CharField(max_length=100, required=False)
+    form_is = forms.CharField(widget=forms.HiddenInput(), initial='add_item')
     
     class Meta:
         model = item
@@ -37,11 +40,15 @@ class itemAddForm(forms.ModelForm):
         self.fields['item_char'].widget = TextInput(attrs={'id': 'item_char_field', 'list': 'itemOptions'})
 
 class unitForm(forms.ModelForm):
+    form_is = forms.CharField(widget=forms.HiddenInput(), initial='unit')
+
     class Meta:
         model = unit
         fields = "__all__"
 
 class locationForm(forms.ModelForm):
+    form_is = forms.CharField(widget=forms.HiddenInput(), initial='location')
+
     class Meta:
         model = location
         fields = "__all__"

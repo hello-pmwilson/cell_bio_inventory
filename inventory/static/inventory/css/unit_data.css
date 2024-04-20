@@ -1,0 +1,29 @@
+#unit-data .data-data {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+section {
+  display: contents;
+}
+form {
+  display: contents;
+}
+
+.filter {
+  font-size: small;
+}
+
+.unit-column {
+  grid-column: 1;
+}
+
+.unit-category-column {
+  grid-column: 2;
+}
+
+#unit-data .edit-column {
+  grid-column: 3;
+}

@@ -38,7 +38,7 @@
     </h3>
   </section>
 
-  <form method="post" class="form"> {% csrf_token %}
+  <form method="post" action="/inventory/add" class="form"> {% csrf_token %} {{ form.form_is }}
     <section>
       <div class="pid-column"></div>
       <div class="item-column">{{ form.item_char }}

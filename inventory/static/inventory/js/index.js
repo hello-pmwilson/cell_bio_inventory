@@ -19,7 +19,7 @@ $(document).ready(function () {
 
   //Load Data
   //When the page is called, make the API call for the initial data to load in
-  var defaultURL = $('#data').attr("defaultURL")
+  var defaultURL = $('#data').attr("get_data")
   $.ajax({
     url: defaultURL,
     type: 'GET',
@@ -52,27 +52,32 @@ $(document).ready(function () {
   //when selecting new tabs
   var tabs = $(".tab")
   tabs.click(function (e) {
+    //update hash fragment
+    window.location.hash = $(this).attr('id');
+    window.selected = $(this).attr('id')
+    updatePage();
+  })
+
+  function updatePage() {
+    let hash = window.location.hash.substring(1)
     //hide scrollbar since it can't transition
     $('#data').css('overflow-y', 'hidden')
 
     //change the color
-    var primaryColor = tabColors[e.target.id][0];
-    var secondaryColor = tabColors[e.target.id][1];
+    var primaryColor = tabColors[hash][0];
+    var secondaryColor = tabColors[hash][1];
     tabs.addClass("inactive");
-    $(e.target).removeClass("inactive");
+    $(`#${hash}`).removeClass("inactive");
     $('html').css('--primary-color', primaryColor);
     $('html').css('--secondary-color', secondaryColor);
     //get the information to load
-    let queryURL = $(this).attr('href')
-    window.selected = $(this).attr('id');
+    let queryURL = $(`#${hash}`).attr('href')
     //send get request and extract only the html we want to update
     $.ajax({
       url: queryURL,
       type: 'GET',
       dataType: 'html',
       success: function (response) {
-
-        console.log(window.selected);
         var data = $(response);
         $("#data").html(data);
         setTimeout(function () { $('#data').css('overflow-y', 'auto'); }, 1000); //wait for transitions then reveal the scrollbar
@@ -81,8 +86,5 @@ $(document).ready(function () {
         console.error('Error fetching new content:', error);
       }
     });
-
-  })
-
-
-})
+    
+  }});  

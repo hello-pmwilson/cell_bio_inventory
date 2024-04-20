@@ -1,0 +1,44 @@
+{% load static %}
+<script src="{% static 'inventory/js/script.js' %}"></script>
+<script>window.selected = 'unit'</script>
+<link rel="stylesheet" href="{% static 'inventory/css/unit_data.css' %}">
+<div class="search-bar"><input type="text" id="search" placeholder="Search"></div>
+<div id="unit-data">
+  <h1 class="title">Units</h1>
+  <div class="data-header">
+  </div>
+  <div class="data-data">
+    <section class="column-header">
+      <h3 class="unit-column">Unit<i class="bi bi-caret-down-fill filter"></i>
+        <div class="drop-down">
+          <i class="bi bi-sort-alpha-up" order-by="unit"></i>
+          <i class="bi bi-sort-alpha-down-alt" order-by="-unit"></i>
+        </div>
+      </h3>
+      <h3 class="unit-category-column">Category<i class="bi bi-caret-down-fill filter"></i>
+        <div class="drop-down">
+          <i class="bi bi-sort-alpha-up" order-by="unit_category"></i>
+          <i class="bi bi-sort-alpha-down-alt" order-by="-unit_category"></i>
+        </div>
+      </h3>
+    </section>
+
+    <form method="post" action="/inventory/add" class="form"> {% csrf_token %} {{ form.form_is }}
+      <section>
+        <!-- {{ form.0.unit.errors }} for including to display errors like 'unit already exists' -->
+        <div class="unit-column">{{ form.unit }}</div>
+        <div class="unit-category-column">{{ form.unit_category }}</div>
+        <div class="edit-column"><input type="submit" value="Submit"></div>
+      </section>
+    </form>
+    {% for item in data %}
+    <section id="{{item.id}}">
+      <div class="unit-column">{{ item.unit }}</div>
+      <div class="unit-category-column">{{ item.unit_category }}</div>
+      <div class="edit-column">
+        <div class="edit"><i class="bi bi-trash3 delete"></i></div>
+      </div>
+    </section>
+    {% endfor %}
+  </div>
+</div>

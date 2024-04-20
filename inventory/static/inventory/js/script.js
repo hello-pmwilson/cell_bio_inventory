@@ -36,7 +36,6 @@ $(document).ready(function () {
 					type: 'GET',
 					dataType: 'html',
 					success: function () {
-						console.log('success');
 						//if successful the row stays hidden 
 					},
 					error: function (error) {
@@ -69,6 +68,46 @@ $(document).ready(function () {
 
 	);
 
+  $('form').submit(function(e){
+		e.preventDefault();
+		const formData = $('form').serialize();
+    $.ajax({
+			url: $('form').attr('action'),
+			type: 'POST',
+			data: formData,
+			dataType: 'json',
+			success: function(data) {
+					if (data.status === 'success') {
+							reload();
+					} else {
+							alert('Error occurred');
+					}
+			},
+			error: function(error) {
+					console.error('Error:', error);
+					alert('Error occurred');
+			}
+	});		
+	})
+
+//when django sends a request to reload
+function reload() {
+	selected = window.selected;
+	orderBy = '-id';
+	query = `/inventory/get_data?selected=${window.selected}&order_by=${orderBy}`;
+	$.ajax({
+		url: query,
+		type: 'GET',
+		dataType: 'html',
+		success: function (response) {
+			var data = $(response);
+			$("#data").html(data);
+		},
+		error: function (error) {
+			console.error('Error fetching new content:', error);
+		}
+	});
+}
 	//as user types in the search bar, search through all cells in the table
 	//skipping the form row, and update what is shown in the table based on matches
 	//case insensitive
