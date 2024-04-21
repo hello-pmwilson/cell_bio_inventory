@@ -23,20 +23,21 @@
       </h3>
     </section>
 
+    <span id="form">
     <form method="post" action="/inventory/add" class="form"> {% csrf_token %} {{ form.form_is }}
       <section>
         <!-- {{ form.0.unit.errors }} for including to display errors like 'unit already exists' -->
         <div class="unit-column">{{ form.unit }}</div>
         <div class="unit-category-column">{{ form.unit_category }}</div>
-        <div class="edit-column"><input type="submit" value="Submit"></div>
+        <div class="edit-column"><input id="submit" type="submit" value="Submit"></div>
       </section>
-    </form>
+    </form></span>
     {% for item in data %}
     <section id="{{item.id}}">
       <div class="unit-column">{{ item.unit }}</div>
       <div class="unit-category-column">{{ item.unit_category }}</div>
       <div class="edit-column">
-        <div class="edit"><i class="bi bi-trash3 delete"></i></div>
+        <div class="edit"><i class="bi bi-trash3 delete"></i><i class="bi bi-pen edit-record"></i></div>
       </div>
     </section>
     {% endfor %}
