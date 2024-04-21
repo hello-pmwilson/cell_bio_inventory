@@ -43,7 +43,7 @@ $(document).ready(function () {
 						console.error('Error fetching new content:', error);
 						for (let i = 0; i < children.length; i++) {
 							$(children[i]).toggle();
-							$(children[i]).css('background-color', 'var(--fail')
+							$(children[i]).css('background-color', 'var(--fail)')
 						};
 						//for half a second before returning to normal
 						setTimeout(function(){
@@ -68,6 +68,120 @@ $(document).ready(function () {
 
 	);
 
+	var cells = $(rows).find("div");
+
+
+	$('.edit-record').click(function(e) {
+		var section = $($($(e.target).parent()).parent()).parent();
+		var sectionID = $(section).attr('id')
+
+		if (sectionID == 1 && (window.selected == 'unit' || window.selected == 'location' || window.selected == 'add_item')) {
+			alert('Sorry, This value is set as the default. You cannot change it.');
+			return;
+		};
+
+		var sectionChildren = $(section).children()
+		var originalValues = {}
+		sectionChildren.each(function(index, element){
+			let elementClass = $(element).attr('class').split(' ')[0];
+			let elementValue = $(element).text();
+			originalValues[elementClass] = elementValue;		
+		})
+
+	// Create the modal popup dynamically using jQuery
+	var modal = $('<div>', {
+		class: 'modal',
+		id: 'myModal'
+	});
+
+	var modalContent = $('<div>', {
+		class: 'modal-content'
+	});
+
+	var closeBtn = $('<span>', {
+		class: 'close',
+		html: '&times;',
+
+	});
+
+	var formContent = $('#form').html()
+	var formContentObj = $($.parseHTML(formContent));
+	formSection = formContentObj.find('section')
+	formItems = formSection.children()
+	$(formItems).each(function(index, element){
+		var elementClass = $(element).attr('class').trim();
+		var elementValue = originalValues[elementClass];
+		var formChild = $(element).children()[0] 
+		var formChildTag = $(formChild).prop('tagName')
+		if (formChildTag == 'INPUT') {
+			if ($(formChild).prop('id') == 'submit') {
+				//pass
+			} else {
+			$(formChild).attr('value', elementValue);
+			}
+		} else if (formChildTag == 'SELECT') {
+			var options = $(formChild).find('option')
+			options.removeAttr('selected');
+			var op = $(options).filter(function(){
+        return $(this).html() === elementValue;
+    });
+			$(op).attr('selected','selected');
+		} else if  (formChildTag == 'TEXTAREA') {
+			$(formChild).text(elementValue);
+		} else {
+			//pass
+		}
+		
+		
+	})
+	var formHTML = $(formContentObj[1])[0].outerHTML;
+
+	var content = $('<p>', {
+		html: formHTML
+	});
+
+	// Append elements to modalContent
+	modalContent.append(closeBtn, content);
+
+	// Append modalContent to modal
+	modal.append(modalContent);
+
+	// Append modal to body
+	$('body').append(modal);	
+	
+	$('.close').click(function(){
+		$("#myModal").remove();
+	})
+
+	var submitBtn = $('#myModal').find('#submit')
+	$(submitBtn).click(function(e){
+		e.preventDefault();
+		const formData = $('#myModal').find('form');
+		var qurl = `/inventory/edit?id=${sectionID}`
+		$.ajax({
+			url: qurl,
+			type: 'POST',
+			data: formData.serialize(),
+			dataType: 'json',
+			success: function(data) {
+					if (data.status === 'success') {
+							$("#myModal").remove();
+							reload();
+					} else {
+							alert('Error occurred');
+					}
+			},
+			error: function(error) {
+					console.error('Error:', error);
+					alert('Error occurred');
+			}
+	});			
+
+
+	})
+});
+
+
   $('form').submit(function(e){
 		e.preventDefault();
 		const formData = $('form').serialize();
@@ -78,7 +192,7 @@ $(document).ready(function () {
 			dataType: 'json',
 			success: function(data) {
 					if (data.status === 'success') {
-							reload();
+							reload_add();
 					} else {
 							alert('Error occurred');
 					}
@@ -90,8 +204,8 @@ $(document).ready(function () {
 	});		
 	})
 
-//when django sends a request to reload
-function reload() {
+//when django sends a request to reload after adding a new record
+function reload_add() {
 	selected = window.selected;
 	orderBy = '-id';
 	query = `/inventory/get_data?selected=${window.selected}&order_by=${orderBy}`;
@@ -108,6 +222,25 @@ function reload() {
 		}
 	});
 }
+
+function reload(){
+	selected = window.selected;
+	query = `/inventory/get_data?selected=${window.selected}`;
+	$.ajax({
+		url: query,
+		type: 'GET',
+		dataType: 'html',
+		success: function (response) {
+			var data = $(response);
+			$("#data").html(data);
+		},
+		error: function (error) {
+			console.error('Error fetching new content:', error);
+		}
+	});
+};
+
+
 	//as user types in the search bar, search through all cells in the table
 	//skipping the form row, and update what is shown in the table based on matches
 	//case insensitive

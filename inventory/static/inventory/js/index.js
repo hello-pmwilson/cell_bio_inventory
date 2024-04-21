@@ -32,7 +32,6 @@ $(document).ready(function () {
         clearInterval(loopLoadingFlask);
         $("#data").html(data);
       }, 0);
-
     },
     error: function (error) {
       console.error('Error fetching new content:', error);
@@ -48,6 +47,8 @@ $(document).ready(function () {
     "location": ["#9c8bb1", "#817f9b"], //purple
     "unit": ["#f5d89f", "#eac86f"] //yellow
   }
+
+
 
   //when selecting new tabs
   var tabs = $(".tab")

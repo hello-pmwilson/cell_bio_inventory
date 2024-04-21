@@ -51,6 +51,15 @@ class data:
 			self.form(request).save() 
 		else:
 			print(self.form(request).errors)
+
+	def edit(self, request, edit_id):
+		print("method edit reached")
+		record = self.db.objects.get(pk=edit_id)
+		print(record)
+		form = self.form(request, instance=record)
+		if form.is_valid():
+			print("for save success")
+			form.save()
 		
 
     
@@ -114,6 +123,25 @@ def add(request):
 		data_dict[selected].add(request.POST)
 
 	return JsonResponse({'status': 'success', 'message': 'Form submitted successfully'})
+
+def edit(request):
+	print("edit reached")
+	request.POST = request.POST.copy()
+	selected = request.POST['form_is']	
+	qinstance = request.GET['id']
+	if 'item_char' in request.POST:
+		selected_item = request.POST.pop('item_char', None)[0].strip()
+	if selected_item == '':
+		item_query = item.objects.get(item=inventory.objects.get(pk=qinstance))
+		print(item_query)
+		print("blank")
+	else: 
+		item_query, created = item.objects.get_or_create(item=selected_item, defaults={'item_description':'TBD', 'category': category.objects.get(pk=1)})
+	request.POST['item'] = item.objects.get(item=item_query).id
+	print("request" , request.POST['item'])
+	data_dict[selected].edit(request.POST, qinstance)
+	return JsonResponse({'status': 'success', 'message': 'Form submitted successfully'})
+
 
 def skeleton(request):
   return render(request, 'inventory/skeleton.html')
