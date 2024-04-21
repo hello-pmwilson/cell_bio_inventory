@@ -55,7 +55,6 @@ class data:
 	def edit(self, request, edit_id):
 		print("method edit reached")
 		record = self.db.objects.get(pk=edit_id)
-		print(record)
 		form = self.form(request, instance=record)
 		if form.is_valid():
 			print("for save success")
@@ -133,9 +132,12 @@ def edit(request):
 		selected_item = request.POST.pop('item_char', None)[0].strip()
 	if selected_item == '':
 		item_query = item.objects.get(item=inventory.objects.get(pk=qinstance))
-		print(item_query)
-		print("blank")
 	else: 
+		if selected == 'add_item': 
+			request.POST['item'] = selected_item
+			print('post' , request.POST['item'])
+			a_item.edit(request.POST, qinstance)
+			return JsonResponse({'status': 'success', 'message': 'Form submitted successfully'})
 		item_query, created = item.objects.get_or_create(item=selected_item, defaults={'item_description':'TBD', 'category': category.objects.get(pk=1)})
 	request.POST['item'] = item.objects.get(item=item_query).id
 	print("request" , request.POST['item'])
