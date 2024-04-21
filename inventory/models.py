@@ -20,7 +20,7 @@ class location(models.Model):
 # options for locations to choose from
 
 class status(models.Model):
-    status = models.CharField(max_length=10, default="in the void", unique=True)
+    status = models.CharField(max_length=25, default="in the void", unique=True)
 
     def __str__(self):
         return self.status
