@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["PGDATABASE"],
-        'USER': os.environ["PGUSER"],
-        'PASSWORD': os.environ["PGPASSWORD"],
-        'HOST': os.environ["PGHOST"],
-        'PORT': os.environ["PGPORT"],
+        'NAME': os.getenv('RAILWAY_POSTGRES_DB', os.environ["PGDATABASE"]),
+        'USER': os.getenv('RAILWAY_POSTGRES_USER', os.environ["PGUSER"]),
+        'PASSWORD': os.getenv('RAILWAY_POSTGRES_PASSWORD', os.environ["PGPASSWORD"]),
+        'HOST': os.getenv('RAILWAY_POSTGRES_HOST', os.environ["PGHOST"]),
+        'PORT': os.getenv('RAILWAY_POSTGRES_PORT', os.environ["PGPORT"]),
     }
 }
 
